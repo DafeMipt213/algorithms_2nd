@@ -1,5 +1,5 @@
-#include "graph_view.h"
-#include "container_couts.h"
+#include "graph_view.hpp"
+#include "container_couts.hpp"
 
 Adjacency_matrix& Adjacency_matrix::operator= (const Adjacency_list_vec& vec_list)
 {
