@@ -23,8 +23,8 @@ class Vertex
     /* Struct of a vertex in a graph */
 
     public:
-        Vertex(Vertex* parent = nullptr): 
-            _parent{parent} {}
+        Vertex(size_t number, Vertex* parent = nullptr): 
+            _parent{parent}, _number{number} {}
 
         Vertex* get_parent() {return _parent; };
         std::vector<Vertex*> get_children() {return _children; };
@@ -32,6 +32,7 @@ class Vertex
         void add_child(Vertex* children) {_children.push_back(children); };
 
     private:
+        size_t _number;
         Vertex* _parent = nullptr;
         std::vector<Vertex*> _children;
         std::string _colour = Colour::white; // possbile colours are "white", "gray" and "'black"
