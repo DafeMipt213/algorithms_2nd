@@ -27,9 +27,10 @@ class Vertex
             _parent{parent}, _number{number} {}
 
         Vertex* get_parent() {return _parent; };
-        std::vector<Vertex*> get_children() {return _children; };
+        std::vector<Vertex*> get_children() { return _children; };
 
-        void add_child(Vertex* children) {_children.push_back(children); };
+        void add_child(Vertex* children) { _children.push_back(children); };
+        void change_colour(Colour new_colour) { this->_colour = new_colour; };
 
     private:
         size_t _number;
