@@ -39,3 +39,17 @@ class Vertex
         Colour _colour = WHITE; // possbile colours are "white", "gray" and "'black"
 };
 
+class Graph
+{
+    public:
+        Graph(bool root=false){
+            if (root)
+                this->_roots.push_back(new Vertex(this->_cur_number++));
+        }
+
+        void add_element(Vertex* parent=nullptr); // add new element to the graph
+        std::vector<Vertex*> topology_sort(); // get sorted vertices
+    private:
+        std::vector<Vertex*> _roots; // vector with all roots in graph
+        size_t _cur_number = 1; // number of last added vertex
+};
