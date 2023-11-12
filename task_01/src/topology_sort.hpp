@@ -11,12 +11,12 @@ In these interpreatation all vertices can be:
     3) "gray"  (if gone in but not gone out)
 */
 
-namespace Colour
+enum Colour
 {
-    std::string white = "white";
-    std::string gray = "gray";
-    std::string black = "black";
-}
+    WHITE,
+    GRAY,
+    BLACK,
+};
 
 class Vertex
 {
@@ -35,5 +35,6 @@ class Vertex
         size_t _number;
         Vertex* _parent = nullptr;
         std::vector<Vertex*> _children;
-        std::string _colour = Colour::white; // possbile colours are "white", "gray" and "'black"
-}
+        Colour _colour = WHITE; // possbile colours are "white", "gray" and "'black"
+};
+
