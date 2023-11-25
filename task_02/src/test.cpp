@@ -1,6 +1,9 @@
 
 #include <gtest/gtest.h>
 
-TEST(TopologySort, Simple) {
-  ASSERT_EQ(1, 1);  // Stack []
+#include "search.hpp"
+
+TEST(BridgeSearch, Simple) {
+  Graph graph{{1}, {0}};
+  ASSERT_EQ(bridge_search(graph), std::vector<edge>{edge(0, 1)});
 }
