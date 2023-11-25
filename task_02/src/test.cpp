@@ -6,6 +6,7 @@
 TEST(BridgeSearch, Simple) {
   Graph graph{{1}, {0}};
   ASSERT_EQ(BridgeSearch(graph), std::vector<edge>{edge(0, 1)});
+
 }
 
 TEST(BridgeSearch, WithoutBridges) {
