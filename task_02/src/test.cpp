@@ -3,6 +3,7 @@
 
 #include "search.hpp"
 
-TEST(TopologySort, Simple) {
-  ASSERT_EQ(1, 1);  // Stack []
+TEST(BridgeSearch, Simple) {
+  Graph graph{{1}, {0}};
+  ASSERT_EQ(bridge_search(graph), std::vector<edge>{edge(0, 1)});
 }
