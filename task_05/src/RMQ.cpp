@@ -1,4 +1,5 @@
 #include "RMQ.hpp"
+#include <stdexcept>
 
 RMQ::RMQ(const std::vector<int>& input_vector)
 {
@@ -8,10 +9,10 @@ RMQ::RMQ(const std::vector<int>& input_vector)
     minimum_table[0].resize(pow_len, __INT_MAX__);
     int current_pow = pow - 1;
     int curr_pow = 1;
-    for(int i = 1; i < pow + 1; ++i)
+    for(size_t i = 1; i < pow + 1; ++i)
     {
         minimum_table.push_back(std::vector<int>());
-        for(int j = 0; j < minimum_table[i - 1].size() - curr_pow; ++j)
+        for(size_t j = 0; j < minimum_table[i - 1].size() - curr_pow; ++j)
         {
             minimum_table[i].push_back(std::min(minimum_table[i - 1][j], minimum_table[i - 1][j + curr_pow]));
         }
@@ -20,6 +21,8 @@ RMQ::RMQ(const std::vector<int>& input_vector)
 }
 
 int RMQ::findMin(const unsigned int left, const unsigned int right){
+    if(left > right || left < 0 || right > minimum_table[0].size()) 
+        throw std::out_of_range ("wrong border arguments");
     size_t row = std::floor(std::log2(right - left + 1));
     return std::min(minimum_table[row][left], minimum_table[row][right - std::pow(2, row) + 1]);
 }
