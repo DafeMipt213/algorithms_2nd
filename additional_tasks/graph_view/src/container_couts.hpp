@@ -1,5 +1,4 @@
-#ifndef CONTAINER_COUTS_H
-#define CONTAINER_COUTS_H
+#pragma
 
 #include <vector>
 #include <algorithm>
@@ -50,5 +49,3 @@ std::ostream& operator<< (std::ostream& ost, const std::unordered_set<T>& v)
     ost << '}';
     return ost;
 }
-
-#endif // CONTAINER_COUTS_H

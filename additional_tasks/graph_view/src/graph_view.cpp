@@ -1,7 +1,7 @@
 #include "graph_view.hpp"
 #include "container_couts.hpp"
 
-Adjacency_matrix& Adjacency_matrix::operator= (const Adjacency_list_vec& vec_list)
+AdjacencyMatrix& AdjacencyMatrix::operator= (const AdjacencyListVec& vec_list)
 {
     data_.clear();
     data_.resize(vec_list.size(), std::vector<bool>(vec_list.size()));
@@ -11,7 +11,7 @@ Adjacency_matrix& Adjacency_matrix::operator= (const Adjacency_list_vec& vec_lis
     return *this;
 }
 
-Adjacency_matrix& Adjacency_matrix::operator= (const Adjacency_list_unordered_set& unord_list)
+AdjacencyMatrix& AdjacencyMatrix::operator= (const AdjacencyListUnorderedSet& unord_list)
 {
     data_.clear();
     data_.resize(unord_list.size(), std::vector<bool>(unord_list.size()));
@@ -21,7 +21,7 @@ Adjacency_matrix& Adjacency_matrix::operator= (const Adjacency_list_unordered_se
     return *this;
 }
 
-Adjacency_matrix& Adjacency_matrix::operator= (const Edge_list& edge_list)
+AdjacencyMatrix& AdjacencyMatrix::operator= (const EdgeList& edge_list)
 {
     data_.clear();
     size_t max_vertex{0};
@@ -49,7 +49,7 @@ Adjacency_matrix& Adjacency_matrix::operator= (const Edge_list& edge_list)
 
 
 
-Adjacency_list_vec& Adjacency_list_vec::operator= (const Adjacency_matrix& matrix)
+AdjacencyListVec& AdjacencyListVec::operator= (const AdjacencyMatrix& matrix)
 {
     data_.clear();
     data_.resize(matrix.size());
@@ -59,15 +59,15 @@ Adjacency_list_vec& Adjacency_list_vec::operator= (const Adjacency_matrix& matri
     return *this;
 }
 
-Adjacency_list_vec& Adjacency_list_vec::operator= (const Adjacency_list_unordered_set& list)
+AdjacencyListVec& AdjacencyListVec::operator= (const AdjacencyListUnorderedSet& list)
 {
-    Adjacency_matrix matrix(3);
+    AdjacencyMatrix matrix(3);
     matrix = list;
     *this = matrix;
     return *this;
 }
 
-Adjacency_list_vec& Adjacency_list_vec::operator= (const Edge_list& list)
+AdjacencyListVec& AdjacencyListVec::operator= (const EdgeList& list)
 {
     data_.clear();
     size_t max_vertex{0};
@@ -92,7 +92,7 @@ Adjacency_list_vec& Adjacency_list_vec::operator= (const Edge_list& list)
 
 
 
-Adjacency_list_unordered_set& Adjacency_list_unordered_set::operator= (const Adjacency_matrix& matrix)
+AdjacencyListUnorderedSet& AdjacencyListUnorderedSet::operator= (const AdjacencyMatrix& matrix)
 {
     data_.clear();
     data_.resize(matrix.size());
@@ -102,17 +102,17 @@ Adjacency_list_unordered_set& Adjacency_list_unordered_set::operator= (const Adj
     return *this;
 }
 
-Adjacency_list_unordered_set& Adjacency_list_unordered_set::operator= (const Adjacency_list_vec& list)
+AdjacencyListUnorderedSet& AdjacencyListUnorderedSet::operator= (const AdjacencyListVec& list)
 {
-    Adjacency_matrix matrix(3);
+    AdjacencyMatrix matrix(3);
     matrix = list;
     *this = matrix;
     return *this;
 }
 
-Adjacency_list_unordered_set& Adjacency_list_unordered_set::operator= (const Edge_list& list)
+AdjacencyListUnorderedSet& AdjacencyListUnorderedSet::operator= (const EdgeList& list)
 {
-    Adjacency_matrix matrix(3);
+    AdjacencyMatrix matrix(3);
     matrix = list;
     *this = matrix;
     return *this;
@@ -121,7 +121,7 @@ Adjacency_list_unordered_set& Adjacency_list_unordered_set::operator= (const Edg
 
 
 
-Edge_list& Edge_list::operator= (const Adjacency_matrix& matrix)
+EdgeList& EdgeList::operator= (const AdjacencyMatrix& matrix)
 {
     data_.clear();
     for (size_t vertex = 0; vertex < matrix.size(); vertex++)
@@ -130,7 +130,7 @@ Edge_list& Edge_list::operator= (const Adjacency_matrix& matrix)
     return *this;
 }
 
-Edge_list& Edge_list::operator= (const Adjacency_list_vec& list)
+EdgeList& EdgeList::operator= (const AdjacencyListVec& list)
 {
     data_.clear();
     for(size_t parent = 0; parent < list.size(); parent++)
@@ -141,9 +141,9 @@ Edge_list& Edge_list::operator= (const Adjacency_list_vec& list)
     return *this;
 }
 
-Edge_list& Edge_list::operator= (const Adjacency_list_unordered_set& list)
+EdgeList& EdgeList::operator= (const AdjacencyListUnorderedSet& list)
 {
-    Adjacency_matrix matrix(3);
+    AdjacencyMatrix matrix(3);
     matrix = list;
     *this = matrix;
     return *this;
@@ -153,14 +153,14 @@ Edge_list& Edge_list::operator= (const Adjacency_list_unordered_set& list)
 
 
 
-std::ostream& operator<< (std::ostream& ost, Adjacency_matrix& matrix)
+std::ostream& operator<< (std::ostream& ost, AdjacencyMatrix& matrix)
 {
     for (auto& vec : matrix.data_)
         std::cout << vec << std::endl;
     return ost;
 }
 
-std::ostream& operator<< (std::ostream& ost, Adjacency_list_vec& list_vec)
+std::ostream& operator<< (std::ostream& ost, AdjacencyListVec& list_vec)
 {
     size_t i = 0;
     for (auto& vec : list_vec.data_)
@@ -168,14 +168,14 @@ std::ostream& operator<< (std::ostream& ost, Adjacency_list_vec& list_vec)
     return ost;
 }
 
-std::ostream& operator<< (std::ostream& ost, Adjacency_list_unordered_set& list_unord_set)
+std::ostream& operator<< (std::ostream& ost, AdjacencyListUnorderedSet& list_unord_set)
 {
     for (auto& unord_set : list_unord_set.data_)
         std::cout << unord_set << std::endl;
     return ost;
 }
 
-std::ostream& operator<< (std::ostream& ost, Edge_list& edge_list)
+std::ostream& operator<< (std::ostream& ost, EdgeList& edge_list)
 {
     for (auto& pair : edge_list.data_)
         std::cout << pair << std::endl;
