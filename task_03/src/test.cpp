@@ -81,3 +81,12 @@ TEST(Jonson, BigGraphNoNegativeCycle){
                                           { 11, 2, 5, -3, 4, 8, -4, -1, -4, 0 }};
   ASSERT_EQ(d, result);
 }
+
+TEST(Jonson, LittleGraphNoNegativeCycle){
+  std::vector<std::vector<std::pair<int, int>>> graph{{{1, 1}}, {{2, 1}}, {{0, 1}}};
+  std::vector<std::vector<int>> d = jonson(graph);
+  std::vector<std::vector<int>> result = {{0, 1, 2},
+                                          {2, 0, 1},
+                                          {1, 2, 0}};
+  ASSERT_EQ(d, result);
+}
