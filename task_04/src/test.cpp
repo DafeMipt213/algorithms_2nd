@@ -1,8 +1,8 @@
 
 #include <gtest/gtest.h>
 
-#include "topology_sort.hpp"
+#include "Dijkstra_alg.hpp"
 
-TEST(TopologySort, Simple) {
+TEST(Dijkstra_alg, Simple) {
   ASSERT_EQ(1, 1);  // Stack []
 }
