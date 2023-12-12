@@ -6,6 +6,7 @@ struct vertex {
   int number;
   int distance;
   vertex(int number, int distance) : number(number), distance(distance) {}
+  bool operator<(const vertex& vert) const { return distance < vert.distance; }
 };
 
 using Graph = std::vector<std::vector<vertex>>;

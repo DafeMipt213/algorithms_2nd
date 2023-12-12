@@ -16,7 +16,7 @@ int Dijkstra_alg(const Graph& graph, int start, int end) {
 
     if (temp_vert == end) return distances.at(temp_vert);
 
-    for (size_t i = 0; i < graph.at(temp_vert).size(); ++i) {
+    for (std::size_t i = 0; i < graph.at(temp_vert).size(); ++i) {
       int destination = graph.at(temp_vert).at(i).number;
       int distance = graph.at(temp_vert).at(i).distance;
 
@@ -27,4 +27,5 @@ int Dijkstra_alg(const Graph& graph, int start, int end) {
       }
     }
   }
+  return distances.at(end);
 }
