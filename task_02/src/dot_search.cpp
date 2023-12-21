@@ -23,7 +23,7 @@ void dfs_dot(int v, int parent, std::size_t& timer, std::vector<bool>& visited,
     }
   }
   if (parent == -1 && children_count > 1) dots[v] = true;
-} 
+}
 
 std::vector<int> DotSearch(const Graph& graph) {
   auto new_graph = Prepare(graph);
@@ -33,9 +33,8 @@ std::vector<int> DotSearch(const Graph& graph) {
   std::size_t timer = 0;
   std::vector<bool> dots(new_graph.size(), false);
   dfs_dot(0, -1, timer, visited, t_in, t_up, new_graph, dots);
-    std::vector<int> correction_dots;
-    for (std::size_t i = 0; i < dots.size(); ++i) 
-        if (dots.at(i))
-            correction_dots.push_back(i);
+  std::vector<int> correction_dots;
+  for (std::size_t i = 0; i < dots.size(); ++i)
+    if (dots.at(i)) correction_dots.push_back(i);
   return correction_dots;
 }
