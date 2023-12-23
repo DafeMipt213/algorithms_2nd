@@ -1,3 +1,5 @@
 #include <iostream>
-
-int main() { return 0; }
+#include "bridges_and_cutpoints.hpp"
+int main() { 
+    return 0; 
+}
