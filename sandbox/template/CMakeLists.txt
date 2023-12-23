@@ -32,7 +32,7 @@ add_executable(${PROJECT_NAME}_tests ${test_source_list})
 target_link_libraries(
   ${PROJECT_NAME}_tests
   GTest::gtest_main
-  Util
+  Utils
 )
 
 include(GoogleTest)
