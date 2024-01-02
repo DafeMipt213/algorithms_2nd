@@ -3,7 +3,7 @@
 #include <vector>
 #include "deikstra.hpp"
 
-TEST(TopologySort, wiki_test) {
+TEST(dijkstra, wiki_test) {
   Graph g;
 
   std::vector<std::vector<int>> weight_matrix {
@@ -24,3 +24,25 @@ TEST(TopologySort, wiki_test) {
 
   ASSERT_EQ(correct_ans, ans);
 } // Graph from wiki
+
+TEST(dijkstra, second_test)
+{
+  Graph g;
+
+  std::vector<std::vector<int>> weight_matrix {
+    {INF, 10, INF, 30, 100},
+    {10, INF, 50, INF, INF},
+    {INF, 50, INF, 20, 10},
+    {30, INF, 20, INF, 60},
+    {100, INF, 10, 60, INF}
+  };
+
+  g.ReadGraph(weight_matrix);
+
+  vector_t correct_path = {0, 3, 2, 4};
+  int correct_weight = 60;
+  std::pair correct_ans {correct_path, correct_weight};
+  std::pair ans = g.FindPath(0, 4);
+
+  ASSERT_EQ(correct_ans, ans);
+} // Graph from internet
