@@ -1,10 +1,11 @@
 #include "graph.hpp"
 
-void Graph::Dfs(int vertex, int parent)
+void Graph::Dfs(size_t vertex, size_t parent)
 {
     timer_++;
     tin_[vertex] = timer_;
     ret_[vertex] = tin_[vertex];
+    used_[vertex] = true;
     size_t children = 0;
     for (auto to : data_[vertex])
     {
@@ -18,25 +19,25 @@ void Graph::Dfs(int vertex, int parent)
             ret_[vertex] = std::min(ret_[vertex], ret_[to]);
             children += 1;  // for root case
             if (ret_[to] == tin_[to])
-                bridges_.push_back(std::pair<int, int> (vertex, to));
+                bridges_.push_back(std::pair<size_t, size_t> (vertex, to));
             if (ret_[to] >= tin_[vertex] and parent != -1)
                 dots_.push_back(vertex);
         }
-        if (parent == -1 && children > 1)
+        if (parent == -1 && children > 1)  // it's root
             dots_.push_back(vertex);
     }
 }
 
-std::vector<int> FindRouters(Graph& g)
+std::vector<size_t> FindRouters(Graph& g)
 {
-    if (g.empty())
+    if (g.Empty())
         g.FindBridgesAndDots();
     return g.GetDotes();
 }
 
-std::vector<std::pair<int, int>> FindWires(Graph& g)
+std::vector<std::pair<size_t, size_t>> FindWires(Graph& g)
 {
-    if (g.empty())
+    if (g.Empty())
         g.FindBridgesAndDots();
     return g.GetBridges();
 }
