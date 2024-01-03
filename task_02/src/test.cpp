@@ -2,7 +2,6 @@
 #include <gtest/gtest.h>
 
 #include "task.hpp"
-#include "utils.hpp"
 
 TEST(Task, ComplexGraph) {
   Graph graph;
