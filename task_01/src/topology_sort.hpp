@@ -6,7 +6,7 @@
 #include <map>
 #include <vector>
 
-template <typename T>
+template <typename T = int>
 class Graph {
   enum Color { kWhite = 0, kGray = 1, kBlack = 2 };
 
@@ -16,12 +16,10 @@ class Graph {
 
   bool cycled_;
 
-  void DFS(T vertex);
-  std::vector<int> topology_sort();
-
  public:
   Graph() : cycled_(false){};
   void AddEdge(T from, T to);
+  void DFS(T vertex);
   std::vector<T> TopologySort();
 };
 

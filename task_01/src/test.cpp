@@ -2,6 +2,7 @@
 #include <gtest/gtest.h>
 
 #include <string>
+#include <vector>
 
 #include "topology_sort.hpp"
 
@@ -83,5 +84,11 @@ TEST(TopologySort, GraphWithThreeComponents) {
   graph.AddEdge(9, 10);
   graph.AddEdge(9, 11);
   std::vector<int> result{8, 9, 11, 10, 4, 5, 7, 6, 0, 1, 3, 2};
+  ASSERT_EQ(graph.TopologySort(), result);
+}
+
+TEST(TopologySort, EmptyGraph) {
+  Graph graph;
+  std::vector<int> result{};
   ASSERT_EQ(graph.TopologySort(), result);
 }
