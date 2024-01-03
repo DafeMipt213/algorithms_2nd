@@ -42,3 +42,23 @@ TEST(Template, Graph_with_negative_weights)
   std::vector<int> correct_ans = {0, 6, 9, 5, 4, 7};
   ASSERT_EQ(ans, correct_ans);
 }
+
+TEST(Template, Graph_with_negative_cycle) 
+{ 
+  Graph g;
+
+  std::vector<std::vector<int>> weight_matrix {
+    {INF, -2, 1, INF, 5, INF},
+    {-1, INF, 3, -1, INF, INF},
+    {INF, INF, INF, 3, INF, INF},
+    {INF, INF, INF, INF, INF, 3},
+    {INF, INF, INF, 1, INF, 7},
+    {INF, INF, INF, INF, INF, INF}
+  };
+
+  g.ReadGraph(weight_matrix);
+  
+  std::vector<int> ans = g.FindPaths(0);
+  std::vector<int> correct_ans = {0}; // ans = {0} if there is negative cycle
+  ASSERT_EQ(ans, correct_ans);
+}

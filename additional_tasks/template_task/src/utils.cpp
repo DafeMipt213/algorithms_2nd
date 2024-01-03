@@ -32,9 +32,22 @@ std::vector<int> Graph::FindPaths(size_t start_vertex)
     std::vector<int> distances (vertex_count, INF);
     distances[start_vertex] = 0;
 
-    for (size_t i = 0; i < vertex_count - 1; ++i)
+    bool x;
+    for (size_t i = 0; i < vertex_count; ++i)
+    {
+        x = true;
         for (size_t j = 0; j < edges_count; ++j)
             if (distances[edges[j].a] < INF)
-                distances[edges[j].b] = std::min(distances[edges[j].b], distances[edges[j].a] + edges[j].cost);
+                if (distances[edges[j].b] > distances[edges[j].a] + edges[j].cost)
+                {
+                    distances[edges[j].b] = std::min(distances[edges[j].b], distances[edges[j].a] + edges[j].cost);
+                    x = false;
+                }
+    }
+
+    std::vector<int> cycle {0};
+    if (!x)
+        return cycle;
+    
     return distances;
 }
