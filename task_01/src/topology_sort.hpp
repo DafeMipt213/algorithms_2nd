@@ -1,1 +1,60 @@
 #pragma once
+
+#include <algorithm>
+#include <cstddef>
+#include <iostream>
+#include <map>
+#include <vector>
+
+template <typename T>
+class Graph {
+  enum Color { kWhite = 0, kGray = 1, kBlack = 2 };
+
+  std::map<T, std::vector<T>> adjacency_map_;
+  std::map<T, Color> colors_;
+  std::vector<T> exited_vertexes_;
+
+  bool cycled_;
+
+  void DFS(T vertex);
+  std::vector<int> topology_sort();
+
+ public:
+  Graph() : cycled_(false){};
+  void AddEdge(T from, T to);
+  std::vector<T> TopologySort();
+};
+
+template <typename T>
+void Graph<T>::AddEdge(T from, T to) {
+  if (std::find(adjacency_map_[from].begin(), adjacency_map_[from].end(), to) ==
+      adjacency_map_[from].end())
+    adjacency_map_[from].push_back(to);
+  if (adjacency_map_.find(to) == adjacency_map_.end()) adjacency_map_[to] = {};
+  colors_[from] = kWhite;
+  colors_[to] = kWhite;
+}
+
+template <typename T>
+void Graph<T>::DFS(T vertex) {
+  colors_[vertex] = kGray;
+  for (T next_vertex : adjacency_map_[vertex]) {
+    if (colors_[next_vertex] == kWhite)
+      DFS(next_vertex);
+    else if (colors_[next_vertex] == kGray)
+      cycled_ = true;
+  }
+  colors_[vertex] = kBlack;
+  exited_vertexes_.push_back(vertex);
+}
+
+template <typename T>
+std::vector<T> Graph<T>::TopologySort() {
+  for (auto &[vertex, other_vertexes] : adjacency_map_) {
+    if (colors_[vertex] == kWhite) DFS(vertex);
+  }
+
+  if (cycled_) return {};
+  std::reverse(exited_vertexes_.begin(), exited_vertexes_.end());
+  return exited_vertexes_;
+}
