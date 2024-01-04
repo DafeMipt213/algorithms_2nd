@@ -6,6 +6,7 @@
 #include <vector>
 #include <algorithm>
 #include <limits>
+#include <stack>
 
 const auto INF = std::numeric_limits<int>::max(); 
 
