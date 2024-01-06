@@ -1,7 +1,12 @@
 #include "bridges_and_joints.hpp"
+#include <iostream>
 
 bool operator==(const Edge a, const Edge b){
     return (a.first_vertex == b.first_vertex && a.second_vertex == b.second_vertex) || (a.first_vertex == b.second_vertex && a.second_vertex == b.first_vertex);
+}
+
+bool operator<(const Edge a, const Edge b){
+    return (a.first_vertex < b.first_vertex && a.second_vertex < b.second_vertex);
 }
 
 bool operator==(const BridgesAndJoints a, const BridgesAndJoints b){
@@ -20,16 +25,16 @@ void dfs(int vertex, std::vector<bool> &visited, std::vector<std::vector<int>> &
                 dfs(u, visited, graph, depth, minimum_depth, result, vertex);
                 minimum_depth[vertex] = std::min(minimum_depth[vertex], minimum_depth[u]);
                 if (depth[vertex] < minimum_depth[u]) 
-                    result.Bridges.push_back({vertex, u});
+                    result.Bridges.insert({vertex, u});
                 if (depth[vertex] <= minimum_depth[u] && previous != -1)
-                    result.Joints.push_back(vertex);
+                    result.Joints.insert(vertex);
 
               	children++;
             }
         }
     }
     if (previous == -1 && children > 1) 
-        result.Joints.push_back(vertex);
+        result.Joints.insert(vertex);
 }
 
 
