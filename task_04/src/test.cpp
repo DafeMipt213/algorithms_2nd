@@ -29,3 +29,92 @@ TEST(DijkstraAlgorithm, GraphFromDicreteMath) {
                                            {9, 15}, {10, 6}};
   ASSERT_EQ(graph.Dijkstra(1), result);
 }
+
+TEST(DijkstraAlgorithm, AnotherGraphTest) {
+  Graph graph;
+  graph.AddEdge(1, 2, 1);
+  graph.AddEdge(1, 3, 3);
+  graph.AddEdge(2, 3, 1);
+  graph.AddEdge(2, 4, 3);
+  graph.AddEdge(3, 4, 1);
+  graph.AddEdge(3, 5, 5);
+  graph.AddEdge(4, 5, 2);
+  graph.AddEdge(5, 6, 1);
+  graph.AddEdge(6, 7, 1);
+  graph.AddEdge(7, 8, 1);
+  graph.AddEdge(8, 9, 1);
+  graph.AddEdge(9, 10, 1);
+
+  std::map<int, unsigned long long> result{{1, 0}, {2, 1},  {3, 2}, {4, 3},
+                                           {5, 5}, {6, 6},  {7, 7}, {8, 8},
+                                           {9, 9}, {10, 10}};
+  ASSERT_EQ(graph.Dijkstra(1), result);
+}
+
+TEST(DijkstraAlgorithm, SmallGraphTest) {
+  Graph graph;
+  graph.AddEdge(1, 2, 1);
+  graph.AddEdge(2, 3, 2);
+  graph.AddEdge(3, 1, 3);
+
+  std::map<int, unsigned long long> result{{1, 0}, {2, 1}, {3, 3}};
+  ASSERT_EQ(graph.Dijkstra(1), result);
+}
+
+TEST(DijkstraAlgorithm, MiddleSizedGraphTest) {
+  Graph graph;
+  graph.AddEdge(1, 2, 1);
+  graph.AddEdge(1, 3, 5);
+  graph.AddEdge(2, 3, 2);
+  graph.AddEdge(2, 4, 1);
+  graph.AddEdge(3, 5, 3);
+  graph.AddEdge(4, 6, 4);
+  graph.AddEdge(5, 6, 1);
+
+  std::map<int, unsigned long long> result{{1, 0}, {2, 1}, {3, 3},
+                                           {4, 2}, {5, 6}, {6, 6}};
+  ASSERT_EQ(graph.Dijkstra(1), result);
+}
+
+TEST(DijkstraAlgorithm, AnotherMiddleSizedGraphTest) {
+  Graph graph;
+  graph.AddEdge(1, 2, 2);
+  graph.AddEdge(1, 3, 3);
+  graph.AddEdge(2, 4, 1);
+  graph.AddEdge(3, 5, 2);
+  graph.AddEdge(4, 6, 3);
+  graph.AddEdge(5, 6, 1);
+
+  std::map<int, unsigned long long> result{{1, 0}, {2, 2}, {3, 3},
+                                           {4, 3}, {5, 5}, {6, 6}};
+  ASSERT_EQ(graph.Dijkstra(1), result);
+}
+
+TEST(DijkstraAlgorithm, StartFromNode1) {
+  Graph graph;
+  graph.AddEdge(1, 2, 2);
+  graph.AddEdge(1, 3, 3);
+  graph.AddEdge(2, 4, 1);
+  graph.AddEdge(3, 5, 2);
+  graph.AddEdge(4, 6, 3);
+  graph.AddEdge(5, 6, 1);
+
+  std::map<int, unsigned long long> result{{1, 0}, {2, 2}, {3, 3},
+                                           {4, 3}, {5, 5}, {6, 6}};
+  ASSERT_EQ(graph.Dijkstra(1), result);
+}
+
+TEST(DijkstraAlgorithm, StartFromNode2) {
+  Graph graph;
+  graph.AddEdge(1, 2, 2);
+  graph.AddEdge(1, 3, 3);
+  graph.AddEdge(2, 1, 2);
+  graph.AddEdge(2, 4, 1);
+  graph.AddEdge(3, 5, 2);
+  graph.AddEdge(4, 6, 3);
+  graph.AddEdge(5, 6, 1);
+
+  std::map<int, unsigned long long> result{{1, 2}, {2, 0}, {3, 5},
+                                           {4, 1}, {5, 7}, {6, 4}};
+  ASSERT_EQ(graph.Dijkstra(2), result);
+}
