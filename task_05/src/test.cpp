@@ -46,3 +46,15 @@ TEST(RMQ, FriendTest) {
   std::vector<int> graph{-50, -40, -30, -20, -10};
   ASSERT_EQ(RMQ(0, 5, graph), 0);
 }
+
+TEST(RMQ, GenericTestFirst) {
+  std::vector<int> graph{-60, -75, 100, 5,  53, -24, -20, 76,
+                         -97, 17,  -10, 58, -6, -61, -3};
+  ASSERT_EQ(RMQ(3, 15, graph), 8);
+}
+
+TEST(RMQ, PythonTest) {
+  std::vector<int> graph{-19, 3, -92, -86, 88, -53, -58,
+                         -36, 7, 82,  -52, 90, -57, 48};
+  ASSERT_EQ(RMQ(3, 7, graph), 3);
+}
