@@ -51,7 +51,7 @@ TEST(RMQ, Test7) {
   ASSERT_EQ(solution.RMQ(5, 9), 8);
 }
 
-TEST(RMQ, Test8) {
+TEST(RMQ, YetAnotherTest) {
   std::vector<int> data{81, 16, -20, 82, 45, 47, 46, 91, 51, 6, -28, -24};
   Solution solution(data);
   ASSERT_EQ(solution.RMQ(4, 8), 4);
@@ -68,4 +68,39 @@ TEST(RMQ, Test10) {
                         -36, 7, 82,  -52, 90, -57, 48};
   Solution solution(data);
   ASSERT_EQ(solution.RMQ(3, 7), 3);
+}
+
+TEST(RMQ, Test11) {
+  std::vector<int> data{10, 20, 30, 40, 50, 60, 70, 80, 90, 100};
+  Solution solution(data);
+  ASSERT_EQ(solution.RMQ(0, 5), 0);
+  ASSERT_EQ(solution.RMQ(5, 9), 5);
+}
+
+TEST(RMQ, Test12) {
+  std::vector<int> data{100, 90, 80, 70, 60, 50, 40, 30, 20, 10};
+  Solution solution(data);
+  ASSERT_EQ(solution.RMQ(0, 5), 5);
+  ASSERT_EQ(solution.RMQ(5, 9), 9);
+}
+
+TEST(RMQ, Test13) {
+  std::vector<int> data{-10, -20, -30, -40, -50, -60, -70, -80, -90, -100};
+  Solution solution(data);
+  ASSERT_EQ(solution.RMQ(0, 5), 5);
+  ASSERT_EQ(solution.RMQ(5, 9), 9);
+}
+
+TEST(RMQ, Test14) {
+  std::vector<int> data{-100, -90, -80, -70, -60, -50, -40, -30, -20, -10};
+  Solution solution(data);
+  ASSERT_EQ(solution.RMQ(0, 5), 0);
+  ASSERT_EQ(solution.RMQ(5, 9), 5);
+}
+
+TEST(RMQ, Test15) {
+  std::vector<int> data{10, -20, 30, -40, 50, -60, 70, -80, 90, -100};
+  Solution solution(data);
+  ASSERT_EQ(solution.RMQ(0, 5), 5);
+  ASSERT_EQ(solution.RMQ(5, 9), 9);
 }
