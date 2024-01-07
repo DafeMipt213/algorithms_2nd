@@ -8,8 +8,8 @@ struct AllData{
     AllData(){};
 };
 
-void dfs(int v, int p, int h, AllData &data);
-int min_by_h(int i, int j, AllData data);
-void precompute_lca(int root, AllData &data);
-int lca_in_block(int b, int l, int r, AllData &data);
-int lca(int v, int u, AllData &data);
+void DFS(int v, int p, int h, AllData &data);
+int MinimumHeights(int i, int j, AllData &data);
+void Precompute(int root, AllData &data);
+int LCABlock(int b, int l, int r, AllData &data);
+int LCA(int v, int u, AllData &data);

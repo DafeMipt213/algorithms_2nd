@@ -1,13 +1,6 @@
 #include "lca.hpp"
 
-const int MAXN = 100*1000;
-const int MAXLIST = MAXN * 2;
-const int LOG_MAXLIST = 18;
-const int SQRT_MAXLIST = 447;
-const int MAXBLOCKS = MAXLIST / ((LOG_MAXLIST+1)/2) + 1;
-
-
-void dfs(int v, int p, int h, AllData &data) {
+void DFS(int v, int p, int h, AllData &data) {
     data.visited[v] = data.euler_bypass.size();
     data.euler_bypass.push_back(v);
     data.height[v] = h;
@@ -15,7 +8,7 @@ void dfs(int v, int p, int h, AllData &data) {
     for (int u : data.graph[v]) {
         if (u == p)
             continue;
-        dfs(u, v, h + 1, data);
+        DFS(u, v, h + 1, data);
         data.euler_bypass.push_back(v);
     }
 }
@@ -24,11 +17,11 @@ int MinimumHeights(int i, int j, AllData &data) {
     return data.height[data.euler_bypass[i]] < data.height[data.euler_bypass[j]] ? i : j;
 }
 
-void precompute_lca(int root, AllData &data) {
+void Precompute(int root, AllData &data) {
     data.visited.assign(data.n, -1);
     data.height.assign(data.n, 0);
     data.euler_bypass.reserve(2 * data.n);
-    dfs(root, -1, 0, data);
+    DFS(root, -1, 0, data);
 
     int m = data.euler_bypass.size();
     data.log2.reserve(m + 1);
@@ -81,11 +74,11 @@ void precompute_lca(int root, AllData &data) {
     }
 }
 
-int lca_in_block(int b, int l, int r, AllData &data) {
+int LCABlock(int b, int l, int r, AllData &data) {
     return data.blocks[data.block_mask[b]][l][r] + b * data.block_size;
 }
 
-int lca(int v, int u, AllData &data) {
+int LCA(int v, int u, AllData &data) {
     int l = data.visited[v];
     int r = data.visited[u];
     if (l > r)
@@ -93,9 +86,9 @@ int lca(int v, int u, AllData &data) {
     int bl = l / data.block_size;
     int br = r / data.block_size;
     if (bl == br)
-        return data.euler_bypass[lca_in_block(bl, l % data.block_size, r % data.block_size, data)];
-    int ans1 = lca_in_block(bl, l % data.block_size, data.block_size - 1, data);
-    int ans2 = lca_in_block(br, 0, r % data.block_size, data);
+        return data.euler_bypass[LCABlock(bl, l % data.block_size, r % data.block_size, data)];
+    int ans1 = LCABlock(bl, l % data.block_size, data.block_size - 1, data);
+    int ans2 = LCABlock(br, 0, r % data.block_size, data);
     int ans = MinimumHeights(ans1, ans2, data);
     if (bl + 1 < br) {
         int l = data.log2[br - bl - 1];
