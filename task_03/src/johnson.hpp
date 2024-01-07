@@ -19,8 +19,8 @@ class Graph {
   std::map<int, std::vector<std::pair<int, long long>>> adjacency_map_;
   bool is_cycled = false;
 
-  void PrepareGraph_();
-  void ChangeEdges_();
+  void PrepareGraph();
+  void ChangeEdges();
 
  public:
   Graph() = default;

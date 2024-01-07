@@ -25,7 +25,7 @@ void Graph::AddVertex(int vertex) {
   distances_[vertex] = LONG_LONG_MAX;
 }
 
-void Graph::PrepareGraph_() {
+void Graph::PrepareGraph() {
   size_t vertexes_count = vertexes_.size();
   for (size_t i = 0; i < vertexes_count; i++) {
     AddEdge(INT_MIN, vertexes_[i], 0);
@@ -51,7 +51,7 @@ bool Graph::BellmanFord(int vertex) {
   return is_cycled;
 }
 
-void Graph::ChangeEdges_() {
+void Graph::ChangeEdges() {
   if (is_cycled) return;
 
   for (auto &vertex : vertexes_) values_[vertex] = distances_[vertex];
@@ -109,11 +109,11 @@ std::map<int, long long> Graph::Dijkstra(int root) {
 std::map<int, std::map<int, long long>> Graph::Johnson() {
   std::map<int, std::map<int, long long>> result;
 
-  PrepareGraph_();
+  PrepareGraph();
   BellmanFord(INT_MIN);
   if (is_cycled) return {};
 
-  ChangeEdges_();
+  ChangeEdges();
   for (auto &vertex : vertexes_) {
     auto distances = Dijkstra(vertex);
     result[vertex] = distances;
