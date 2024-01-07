@@ -1,5 +1,6 @@
 #pragma once
 
+#include <stack>
 #include <vector>
 
 struct AllData {
@@ -15,3 +16,4 @@ int MinimumHeights(int i, int j, AllData &data);
 void Precompute(int root, AllData &data);
 int LCABlock(int b, int l, int r, AllData &data);
 int LCA(int v, int u, AllData &data);
+int RMQ(int left, int right, std::vector<int> &graph);

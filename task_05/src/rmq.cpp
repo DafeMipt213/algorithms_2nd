@@ -1,4 +1,4 @@
-#include "lca.hpp"
+#include "rmq.hpp"
 
 void DFS(int v, int p, int h, AllData &data) {
   data.visited[v] = data.euler_bypass.size();
@@ -100,4 +100,32 @@ int LCA(int v, int u, AllData &data) {
     ans = MinimumHeights(ans, MinimumHeights(ans3, ans4, data), data);
   }
   return data.euler_bypass[ans];
+}
+
+int RMQ(int left, int right, std::vector<int> &graph) {
+  AllData data;
+  std::vector<int> parent(graph.size(), -1);
+  std::stack<int> stack;
+
+  for (int i = 0; i < graph.size(); i++) {
+    int last = -1;
+    while (!stack.empty() && graph[stack.top()] >= graph[i]) {
+      last = stack.top();
+      stack.pop();
+    }
+    if (!stack.empty()) parent[i] = stack.top();
+    if (last >= 0) parent[last] = i;
+    stack.push(i);
+  }
+
+  int root;
+  data.graph.assign(graph.size(), std::vector<int>());
+  for (int i = 0; i < graph.size(); i++) {
+    data.graph[i].push_back(parent[i]);
+    if (parent[i] != -1) data.graph[parent[i]].push_back(i);
+    if (parent[i] == -1) root = i;
+  }
+  data.n = graph.size();
+  Precompute(root, data);
+  return LCA(left, right, data);
 }
