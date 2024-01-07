@@ -1,43 +1,31 @@
 #include "rmq.hpp"
 
-#include <iostream>
-#include <random>
-
-#include "treap.hpp"
-
-void Solution::ConvertTree(Node *node, Node *parent) {
-  if (!node) return;
-
-  int node_size = node->size - 1;
-  int parent_size = -1;
-  if (parent) parent_size = tree.Size(parent) - 1;
-
-  if (node->left) {
-    std::cout << tree.Size(node) << "\n";
-    adjacency_list_[node_size].push_back(tree.Size(node->left) - 1);
-    ConvertTree(node->left, node);
-  }
-  if (node->right) {
-    std::cout << tree.Size(node) << "\n";
-    adjacency_list_[node_size].push_back(tree.Size(node->right) - 1);
-    ConvertTree(node->right, node);
-  }
-  adjacency_list_[node_size].push_back(parent_size);
-}
-
-Solution::Solution(std::vector<int> &_data) {
-  int size = _data.size();
+Solution::Solution(std::vector<int> &data) {
+  int size = data.size();
   heights_.assign(size, 0);
   eulerian_tour_.reserve(2 * size);
   eulerian_tour_position_.assign(size, -1);
   adjacency_list_.assign(size, std::vector<int>());
-  for (auto &el : adjacency_list_) el.reserve(size);
 
-  // generate treap and run DFS
-  tree = CartesianTree(_data);
+  // generate cartesian tree
+  std::vector<int> parent(data.size(), -1);
+  std::stack<int> s;
+  for (int i = 0; i < data.size(); i++) {
+    int last = -1;
+    while (!s.empty() && data[s.top()] >= data[i]) {
+      last = s.top();
+      s.pop();
+    }
+    if (!s.empty()) parent[i] = s.top();
+    if (last >= 0) parent[last] = i;
+    s.push(i);
+  }
 
-  root_ = tree.Size(tree.root_) - 1;
-  ConvertTree(tree.root_, nullptr);
+  for (int i = 0; i < size; i++) {
+    adjacency_list_[i].push_back(parent[i]);
+    if (parent[i] != -1) adjacency_list_[parent[i]].push_back(i);
+    if (parent[i] == -1) root_ = i;
+  }
 
   DFS(root_, -1, 0);
   BuildLCA();
@@ -52,26 +40,6 @@ void Solution::DFS(int vertex, int parent, int current_height) {
     if (u == parent) continue;
     DFS(u, vertex, current_height + 1);
     eulerian_tour_.push_back(vertex);
-  }
-}
-
-void Solution::DFS(Node *vertex, int current_height) {
-  if (!vertex) return;
-  heights_[vertex->size] = current_height;
-  eulerian_tour_position_[vertex->size] = (int)eulerian_tour_.size();
-  eulerian_tour_.push_back(vertex->size);
-
-  if (vertex->left) {
-    if (heights_[vertex->left->size] == -1) {
-      DFS(vertex->left, current_height + 1);
-      eulerian_tour_.push_back(vertex->size);
-    }
-  }
-  if (vertex->right) {
-    if (heights_[vertex->right->size] == -1) {
-      DFS(vertex->right, current_height + 1);
-      eulerian_tour_.push_back(vertex->size);
-    }
   }
 }
 
