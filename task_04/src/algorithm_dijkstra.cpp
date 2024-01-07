@@ -1,6 +1,5 @@
 #include "algorithm_dijkstra.hpp"
 
-
 int VertexWithShortestDistance(std::vector<long long> &dist, std::vector<bool> &visited)
 {
 	int min = INT_MAX, min_index;
@@ -10,7 +9,6 @@ int VertexWithShortestDistance(std::vector<long long> &dist, std::vector<bool> &
 	return min_index;
 }
 
-
 std::vector<long long> Dijkstra(std::vector<std::vector<int>> &graph, int source){
 
 	std::vector<long long> distance(graph.size(), INT_MAX); 
@@ -18,7 +16,7 @@ std::vector<long long> Dijkstra(std::vector<std::vector<int>> &graph, int source
 
 	distance[source] = 0;
 
-	for (int _ = 0; _ < graph.size() - 1; _++) {
+	for (int j = 0; j < graph.size() - 1; j++) {
 		int u = VertexWithShortestDistance(distance, visited);
 		visited[u] = true;
 		for (int i = 0; i < graph.size(); i++)
