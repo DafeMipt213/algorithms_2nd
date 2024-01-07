@@ -111,3 +111,9 @@ TEST(LCA, ExtraGraph3) {
   ASSERT_EQ(solution.LCA(13, 14), 6);
   ASSERT_EQ(solution.LCA(17, 9), 1);
 }
+
+TEST(LCA, EmptyGraph) {
+  std::vector<std::vector<int>> graph{};
+  Solution solution(graph, 0);
+  ASSERT_EQ(solution.LCA(1, 2), -1);
+}
