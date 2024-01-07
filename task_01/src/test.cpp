@@ -43,7 +43,7 @@ TEST(TopologySort, TwoPartGraph) {
 
 TEST(TopologySort, OneVerticleGraph) {
   Graph graph(1);
-  graph.addVerticle(0);
+  graph.AddVerticle(0);
   std::vector<int> sort_data {0};
   ASSERT_EQ(graph.TopologicalSort(), sort_data);
 }
