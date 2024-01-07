@@ -1,6 +1,6 @@
 #include "Jonsons_algorithm.hpp"
 
-bool bellman_ford(int n, int source, std::vector <struct edge> &edges, std::vector <long long> &distance){
+bool BellmanFord(int n, int source, std::vector <struct edge> &edges, std::vector <long long> &distance){
     distance[source] = 0;
     for (int i = 0; i <= n; i++){
         bool flag = false;
@@ -47,12 +47,12 @@ std::vector <long long> Dijkstra(int n, int source, std::vector <edge> &edges, s
     return distance;
 }
 
-void johnson(int n, std::vector<std::vector<long long>> &graph, std::vector <struct edge> &edges){
+void Johnson(int n, std::vector<std::vector<long long>> &graph, std::vector <struct edge> &edges){
     std::vector <long long> potential(n + 1, LLONG_MAX);
     for (int i = 1; i <= n; i++) 
         edges.push_back(edge(0, i, 0));
 
-    if (!bellman_ford(n, 0, edges, potential)) return;
+    if (!BellmanFord(n, 0, edges, potential)) return;
 
     for (int i = 1; i <= n; i++) 
         edges.pop_back();
