@@ -1,6 +1,6 @@
 #include "lca.hpp"
 
-Solution::Solution(std::vector<std::vector<int>> &data) {
+Solution::Solution(std::vector<std::vector<int>> &data, int root) {
   int size = data.size();
   eulerian_tour_position_.assign(size, -1);
   heights_.assign(size, 0);
@@ -8,7 +8,7 @@ Solution::Solution(std::vector<std::vector<int>> &data) {
 
   adjacency_list_ = data;
 
-  DFS(0, -1, 0);
+  DFS(root, -1, 0);
   BuildLCA();
 }
 

@@ -29,6 +29,6 @@ class Solution {
 
  public:
   Solution(std::vector<int> &data);
-  Solution(std::vector<std::vector<int>> &data);
+  Solution(std::vector<std::vector<int>> &data, int root);
   int LCA(int v, int u);
 };
