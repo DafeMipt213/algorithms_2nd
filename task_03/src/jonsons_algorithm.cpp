@@ -1,4 +1,4 @@
-#include "Jonsons_algorithm.hpp"
+#include "jonsons_algorithm.hpp"
 
 bool BellmanFord(int n, int source, std::vector <struct edge> &edges, std::vector <long long> &distance){
     distance[source] = 0;

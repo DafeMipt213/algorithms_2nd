@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "Jonsons_algorithm.hpp"
+#include "jonsons_algorithm.hpp"
 
 TEST(Jonson, Simple) {
   std::vector<std::vector<long long>> graph = std::vector<std::vector<long long>>(4, std::vector<long long>(4, 0));
