@@ -7,7 +7,7 @@
 
 template <typename T = int>
 class Graph {
-  enum Color { kWhite = 0, kGray = 1, kBlack = 2 };
+  enum class Color { kWhite = 0, kGray = 1, kBlack = 2 };
 
   std::map<T, std::vector<T>> adjacency_map_;
   std::map<T, Color> colors_;
@@ -28,27 +28,29 @@ void Graph<T>::AddEdge(T from, T to) {
       adjacency_map_[from].end())
     adjacency_map_[from].push_back(to);
   if (adjacency_map_.find(to) == adjacency_map_.end()) adjacency_map_[to] = {};
-  colors_[from] = kWhite;
-  colors_[to] = kWhite;
+  colors_[from] = Color::kWhite;
+  colors_[to] = Color::kWhite;
 }
 
 template <typename T>
 void Graph<T>::DFS(T vertex) {
-  colors_[vertex] = kGray;
+  colors_[vertex] = Color::kGray;
   for (T next_vertex : adjacency_map_[vertex]) {
-    if (colors_[next_vertex] == kWhite)
+    if (colors_[next_vertex] == Color::kWhite)
       DFS(next_vertex);
-    else if (colors_[next_vertex] == kGray)
+    else if (colors_[next_vertex] == Color::kGray) {
       cycled_ = true;
+      return;
+    }
   }
-  colors_[vertex] = kBlack;
+  colors_[vertex] = Color::kBlack;
   exited_vertexes_.push_back(vertex);
 }
 
 template <typename T>
 std::vector<T> Graph<T>::TopologySort() {
   for (auto& [vertex, other_vertexes] : adjacency_map_) {
-    if (colors_[vertex] == kWhite) DFS(vertex);
+    if (colors_[vertex] == Color::kWhite) DFS(vertex);
   }
 
   if (cycled_) return {};
