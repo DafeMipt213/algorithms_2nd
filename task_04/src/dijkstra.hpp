@@ -1,6 +1,6 @@
 #pragma once
 
-#include <climits>
+#include <limits>
 #include <map>
 #include <queue>
 #include <vector>
@@ -24,11 +24,11 @@ template <typename T>
 void Graph<T>::AddEdge(T from, T to, unsigned long long weight) {
   if (std::find(vertexes_.begin(), vertexes_.end(), from) == vertexes_.end()) {
     vertexes_.push_back(from);
-    distances_[from] = ULONG_LONG_MAX;
+    distances_[from] = std::numeric_limits<unsigned long long>::max();
   }
   if (std::find(vertexes_.begin(), vertexes_.end(), to) == vertexes_.end()) {
     vertexes_.push_back(to);
-    distances_[to] = ULONG_LONG_MAX;
+    distances_[to] = std::numeric_limits<unsigned long long>::max();
   }
 
   adjacency_map_[from].push_back({to, weight});
@@ -40,12 +40,13 @@ void Graph<T>::AddVertex(T vertex) {
   if (std::find(vertexes_.begin(), vertexes_.end(), vertex) != vertexes_.end())
     return;
   vertexes_.push_back(vertex);
-  distances_[vertex] = ULONG_LONG_MAX;
+  distances_[vertex] = std::numeric_limits<unsigned long long>::max();
 }
 
 template <typename T>
 std::map<T, unsigned long long> Graph<T>::Dijkstra(T root) {
-  for (auto &vertex : vertexes_) distances_[vertex] = LONG_LONG_MAX;
+  for (auto &vertex : vertexes_)
+    distances_[vertex] = std::numeric_limits<unsigned long long>::max();
 
   distances_[root] = 0;
 
