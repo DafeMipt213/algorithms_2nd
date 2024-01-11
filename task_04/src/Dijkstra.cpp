@@ -1,10 +1,6 @@
 #include "Dijkstra.hpp"
 
-Vertex::Vertex(int destination, int distance)
-{
-    this->destination = destination;
-    this->distance = distance;
-}
+Vertex::Vertex(int destination, int distance) : destination(destination), distance(distance) {}
 
 bool Vertex::operator>(const Vertex& V) const
 {
@@ -20,7 +16,7 @@ int Dijkstra(const std::vector<std::vector<Vertex>>& graph,
 
     while(!dijkstra_heap.empty())
     {
-        Vertex current_vertex = dijkstra_heap.top();
+        const Vertex current_vertex = dijkstra_heap.top();
         dijkstra_heap.pop();
 
         if (distances[current_vertex.destination] == std::numeric_limits<int>::max()) {

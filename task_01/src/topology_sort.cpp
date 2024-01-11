@@ -36,7 +36,7 @@ void Graph::fillStack(int vertex)
     {
         if(colors[i] == 0)
         {
-            still_white = i;
+            still_white = static_cast<int>(i);
         } else if(colors[i] == 1)
         {
             grey_vertexes += 1;

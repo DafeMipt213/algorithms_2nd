@@ -37,7 +37,7 @@ void dijkstra(std::vector<std::vector<std::pair<int, int>>>& graph, int s, std::
 
                         // найдём вершину с минимальным расстоянием
             if (!colors[j] && (v == -1 || d[j] < d[v]))
-                v = j;
+                v = static_cast<int>(j);
         if (d[v] == INF)
             break;
         colors[v] = 1;
@@ -59,11 +59,11 @@ std::vector<std::vector<int>> jonson(std::vector<std::vector<std::pair<int, int>
     std::vector<std::pair<int, int>> extra_vertex(graph.size());
     for(size_t i = 0; i < graph.size(); ++i)
     {
-        extra_vertex[i].first = i;
+        extra_vertex[i].first = static_cast<int>(i);
         result[i].resize(graph.size(), INF);
     }
     graph.push_back(extra_vertex);
-    std::vector<int> d(graph.size());
+    std::vector<int> d(static_cast<size_t> (graph.size()));
 
     if(fordBellman(graph.size(), graph, d) == 0){
         throw std::runtime_error("negative cycle");
