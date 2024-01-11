@@ -13,6 +13,8 @@ Solution::Solution(std::vector<std::vector<int>> &data, int root) {
 }
 
 void Solution::DFS(int vertex, int parent, int current_height) {
+  if (vertex >= adjacency_list_.size()) return;
+
   eulerian_tour_position_[vertex] = (int)eulerian_tour_.size();
   eulerian_tour_.push_back(vertex);
   heights_[vertex] = current_height;
@@ -85,6 +87,7 @@ int Solution::LCAInBlock(int b, int l, int r) {
 }
 
 int Solution::LCA(int v, int u) {
+  if (v >= adjacency_list_.size() || u >= adjacency_list_.size()) return -1;
   int l = eulerian_tour_position_[v];
   int r = eulerian_tour_position_[u];
   if (l > r) std::swap(l, r);
