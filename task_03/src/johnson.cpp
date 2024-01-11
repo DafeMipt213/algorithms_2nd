@@ -1,16 +1,13 @@
 #include "johnson.hpp"
 
-#include <functional>
-#include <queue>
-
 void Graph::AddEdge(int from, int to, long long weight) {
   if (std::find(vertexes_.begin(), vertexes_.end(), from) == vertexes_.end()) {
     vertexes_.push_back(from);
-    distances_[from] = LONG_LONG_MAX;
+    distances_[from] = std::numeric_limits<long long>::max();
   }
   if (std::find(vertexes_.begin(), vertexes_.end(), to) == vertexes_.end()) {
     vertexes_.push_back(to);
-    distances_[to] = LONG_LONG_MAX;
+    distances_[to] = std::numeric_limits<long long>::max();
   }
   edges_.push_back({from, to, weight});
 
@@ -22,13 +19,13 @@ void Graph::AddVertex(int vertex) {
   if (std::find(vertexes_.begin(), vertexes_.end(), vertex) != vertexes_.end())
     return;
   vertexes_.push_back(vertex);
-  distances_[vertex] = LONG_LONG_MAX;
+  distances_[vertex] = std::numeric_limits<long long>::max();
 }
 
 void Graph::PrepareGraph() {
   size_t vertexes_count = vertexes_.size();
   for (size_t i = 0; i < vertexes_count; i++) {
-    AddEdge(INT_MIN, vertexes_[i], 0);
+    AddEdge(std::numeric_limits<int>::min(), vertexes_[i], 0);
   }
 }
 
@@ -37,14 +34,14 @@ bool Graph::BellmanFord(int vertex) {
 
   for (int i = 0; i < vertexes_.size(); i++) {
     for (auto &edge : edges_) {
-      if (distances_[edge.from] != LONG_LONG_MAX &&
+      if (distances_[edge.from] != std::numeric_limits<long long>::max() &&
           distances_[edge.from] + edge.weight < distances_[edge.to])
         distances_[edge.to] = distances_[edge.from] + edge.weight;
     }
   }
 
   for (auto &edge : edges_) {
-    if (distances_[edge.from] != LONG_LONG_MAX &&
+    if (distances_[edge.from] != std::numeric_limits<long long>::max() &&
         distances_[edge.from] + edge.weight < distances_[edge.to])
       is_cycled = true;
   }
@@ -56,12 +53,12 @@ void Graph::ChangeEdges() {
 
   for (auto &vertex : vertexes_) values_[vertex] = distances_[vertex];
   for (auto &edge : edges_)
-    if (edge.from != INT_MIN)
+    if (edge.from != std::numeric_limits<int>::min())
       edge.weight = edge.weight + values_[edge.from] - values_[edge.to];
 
   size_t additional_edges_index = -1;
   for (size_t i = 0; i < edges_.size(); i++) {
-    if (edges_[i].from == INT_MIN) {
+    if (edges_[i].from == std::numeric_limits<int>::min()) {
       additional_edges_index = i;
       break;
     }
@@ -69,11 +66,11 @@ void Graph::ChangeEdges() {
 
   edges_.erase(edges_.begin() + additional_edges_index + 1, edges_.end());
 
-  if (vertexes_.back() == INT_MIN)
+  if (vertexes_.back() == std::numeric_limits<int>::min())
     vertexes_.erase(vertexes_.end() - 1);
   else
     for (size_t i = 0; i < vertexes_.size(); i++) {
-      if (vertexes_[i] == INT_MIN) {
+      if (vertexes_[i] == std::numeric_limits<int>::min()) {
         vertexes_.erase(vertexes_.begin() + i);
         break;
       }
@@ -82,7 +79,8 @@ void Graph::ChangeEdges() {
 
 std::map<int, long long> Graph::Dijkstra(int root) {
   std::map<int, long long> distances;
-  for (auto &vertex : vertexes_) distances[vertex] = LONG_LONG_MAX;
+  for (auto &vertex : vertexes_)
+    distances[vertex] = std::numeric_limits<long long>::max();
 
   distances[root] = 0;
 
@@ -110,7 +108,7 @@ std::map<int, std::map<int, long long>> Graph::Johnson() {
   std::map<int, std::map<int, long long>> result;
 
   PrepareGraph();
-  BellmanFord(INT_MIN);
+  BellmanFord(std::numeric_limits<int>::min());
   if (is_cycled) return {};
 
   ChangeEdges();

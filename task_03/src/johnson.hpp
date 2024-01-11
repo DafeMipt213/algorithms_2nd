@@ -1,6 +1,7 @@
 #pragma once
 
-#include <climits>
+#include <functional>
+#include <limits>
 #include <map>
 #include <queue>
 #include <vector>
