@@ -118,3 +118,55 @@ TEST(DijkstraAlgorithm, StartFromNode2) {
                                            {4, 1}, {5, 7}, {6, 4}};
   ASSERT_EQ(graph.Dijkstra(2), result);
 }
+
+TEST(DijkstraAlgorithm, FullyConnectedGraph) {
+  Graph graph;
+  graph.AddEdge(1, 2, 3);
+  graph.AddEdge(1, 3, 7);
+  graph.AddEdge(2, 4, 2);
+  graph.AddEdge(2, 5, 3);
+  graph.AddEdge(3, 6, 1);
+  graph.AddEdge(4, 7, 4);
+  graph.AddEdge(5, 7, 1);
+  graph.AddEdge(6, 7, 5);
+  graph.AddEdge(3, 1, 2);
+  graph.AddEdge(4, 2, 1);
+  graph.AddEdge(5, 4, 2);
+  graph.AddEdge(6, 3, 1);
+  graph.AddEdge(7, 6, 2);
+
+  std::map<int, unsigned long long> result = {{1, 0}, {2, 3}, {3, 7}, {4, 5},
+                                              {5, 6}, {6, 8}, {7, 7}};
+
+  ASSERT_EQ(graph.Dijkstra(1), result);
+}
+
+TEST(DijkstraAlgorithm, ComplexGraph) {
+  Graph graph;
+  graph.AddEdge(1, 2, 3);
+  graph.AddEdge(1, 3, 7);
+  graph.AddEdge(2, 4, 2);
+  graph.AddEdge(2, 5, 3);
+  graph.AddEdge(3, 6, 1);
+  graph.AddEdge(4, 7, 4);
+  graph.AddEdge(5, 7, 1);
+  graph.AddEdge(6, 7, 5);
+  std::map<int, unsigned long long> result = {{1, 0}, {2, 3}, {3, 7}, {4, 5},
+                                              {5, 6}, {6, 8}, {7, 7}};
+
+  ASSERT_EQ(graph.Dijkstra(1), result);
+}
+
+TEST(DijkstraAlgorithm, AnotherGraph) {
+  Graph graph;
+  graph.AddEdge(1, 2, 4);
+  graph.AddEdge(1, 3, 1);
+  graph.AddEdge(2, 3, 2);
+  graph.AddEdge(2, 4, 5);
+  graph.AddEdge(3, 4, 8);
+  graph.AddEdge(4, 1, 1);
+
+  std::map<int, unsigned long long> result{{1, 0}, {2, 4}, {3, 1}, {4, 9}};
+
+  ASSERT_EQ(graph.Dijkstra(1), result);
+}
