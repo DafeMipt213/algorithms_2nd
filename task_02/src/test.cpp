@@ -134,3 +134,46 @@ TEST(Task, HandGraph) {
   ASSERT_EQ(graph.GetConnections(), connections);
   ASSERT_EQ(graph.GetRouters(), routers);
 }
+
+TEST(Task, GeneratedGraph1) {
+  Graph graph;
+  graph.SetAdjacencyMap({
+      {1, {5}},
+      {2, {5, 6, 8}},
+      {3, {4, 6}},
+      {4, {3, 8}},
+      {5, {1, 2, 6, 9}},
+      {6, {2, 3, 5, 9}},
+      {7, {8}},
+      {8, {2, 4, 7, 9}},
+      {9, {5, 6, 8}},
+      {10, {}},
+  });
+  graph.CalculateSolution();
+  std::vector<std::pair<int, int>> connections{{8, 7}, {1, 5}};
+  std::vector<int> routers{8, 5};
+
+  ASSERT_EQ(graph.GetConnections(), connections);
+  ASSERT_EQ(graph.GetRouters(), routers);
+}
+
+TEST(Task, GeneratedGraph2) {
+  Graph graph;
+  graph.SetAdjacencyMap({{1, {2, 5, 6, 8}},
+                         {2, {1, 3, 5, 6, 7, 10}},
+                         {3, {2, 7, 9}},
+                         {4, {5, 7, 10}},
+                         {5, {1, 2, 4, 7}},
+                         {6, {1, 2, 7, 8}},
+                         {7, {2, 3, 4, 5}},
+                         {8, {1, 6, 10}},
+                         {9, {3, 7, 10}},
+                         {10, {2, 4, 8}}});
+
+  graph.CalculateSolution();
+  std::vector<std::pair<int, int>> connections{{3, 9}};
+  std::vector<int> routers{3};
+
+  ASSERT_EQ(graph.GetConnections(), connections);
+  ASSERT_EQ(graph.GetRouters(), routers);
+}
