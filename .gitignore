@@ -13,3 +13,7 @@ _deps
 .cache/*
 .vscode/*
 build/*
+
+task_05/src/generate.py
+task_05/src/file.txt
+tests.txt
