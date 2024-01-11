@@ -4,19 +4,19 @@
 #include <set>
 #include <stdexcept>
 
-struct vertex {
+struct Vertex {
   int number;
   int distance;
-  vertex(int number, int distance) : number(number), distance(distance) {}
-  bool operator<(const vertex& vert) const { return distance < vert.distance; }
+  Vertex(int number, int distance) : number(number), distance(distance) {}
+  bool operator<(const Vertex& vert) const { return distance < vert.distance; }
 };
 
-bool Ford_Bellman_algorithm(const std::vector<edge>& graph,
-                            std::vector<int>& distances) {
+bool FordBellmanAlgorithm(const std::vector<Edge>& graph,
+                          std::vector<int>& distances) {
   int temp_vertex;
-  for (int i = 0; i < distances.size(); ++i) {
+  for (std::size_t i = 0; i < distances.size(); ++i) {
     temp_vertex = -1;
-    for (int j = 0; j < graph.size(); ++j)
+    for (std::size_t j = 0; j < graph.size(); ++j)
       if (distances[graph[j].end] > distances[graph[j].start] + graph[j].cost &&
           distances[graph[j].start] != std::numeric_limits<int>::max()) {
         distances[graph[j].end] = distances[graph[j].start] + graph[j].cost;
@@ -29,13 +29,13 @@ bool Ford_Bellman_algorithm(const std::vector<edge>& graph,
     return false;
 }
 
-std::vector<int> Dijkstra_alg(const std::vector<std::vector<vertex>>& graph,
-                              int start) {
+std::vector<int> DijkstraAlgorithm(
+    const std::vector<std::vector<Vertex>>& graph, int start) {
   const int inf = std::numeric_limits<int>::max();
   std::vector<int> distances(graph.size(), inf);
   distances[start] = 0;
-  std::set<vertex> queue;
-  queue.insert(vertex(start, distances.at(0)));
+  std::set<Vertex> queue;
+  queue.insert(Vertex(start, distances.at(0)));
 
   while (!queue.empty()) {
     int temp_vert = queue.begin()->number;
@@ -45,33 +45,33 @@ std::vector<int> Dijkstra_alg(const std::vector<std::vector<vertex>>& graph,
       int distance = graph.at(temp_vert).at(i).distance;
 
       if (distances.at(temp_vert) + distance < distances.at(destination)) {
-        queue.erase(vertex(destination, distances.at(destination)));
+        queue.erase(Vertex(destination, distances.at(destination)));
         distances[destination] = distances.at(temp_vert) + distance;
-        queue.insert(vertex(destination, distances.at(destination)));
+        queue.insert(Vertex(destination, distances.at(destination)));
       }
     }
   }
   return distances;
 }
 
-std::vector<std::vector<int>> Johnson_algorithm(const std::vector<edge>& graph,
-                                                int vertexes_count) {
+std::vector<std::vector<int>> FindShortestPathes(const std::vector<Edge>& graph,
+                                                 int vertexes_count) {
   std::vector<int> potential(vertexes_count);
-  if (!Ford_Bellman_algorithm(graph, potential))
+  if (!FordBellmanAlgorithm(graph, potential))
     throw std::runtime_error("negative cycle");
 
-  std::vector<std::vector<vertex>> graph_positive(vertexes_count);
-  for (int i = 0; i < graph.size(); ++i)
-    graph_positive[graph[i].start].push_back(vertex(
+  std::vector<std::vector<Vertex>> graph_positive(vertexes_count);
+  for (std::size_t i = 0; i < graph.size(); ++i)
+    graph_positive[graph[i].start].push_back(Vertex(
         graph[i].end,
         graph[i].cost + potential[graph[i].start] - potential[graph[i].end]));
 
   std::vector<std::vector<int>> distances;
-  for (int i = 0; i < vertexes_count; ++i)
-    distances.push_back(Dijkstra_alg(graph_positive, i));
+  for (std::size_t i = 0; i < vertexes_count; ++i)
+    distances.push_back(DijkstraAlgorithm(graph_positive, i));
 
-  for (int i = 0; i < vertexes_count; ++i)
-    for (int j = 0; j < vertexes_count; ++j)
+  for (std::size_t i = 0; i < vertexes_count; ++i)
+    for (std::size_t j = 0; j < vertexes_count; ++j)
       distances[i][j] = distances[i][j] - potential[i] + potential[j];
   return distances;
 }

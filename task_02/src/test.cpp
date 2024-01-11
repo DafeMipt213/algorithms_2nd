@@ -3,59 +3,58 @@
 
 #include "search.hpp"
 
-TEST(BridgeSearch, Simple) {
+TEST(BridgesSearch, Simple) {
   Graph graph{{1}, {0}};
-  ASSERT_EQ(BridgeSearch(graph), std::vector<edge>{edge(0, 1)});
-
+  ASSERT_EQ(BridgesSearch(graph), std::vector<Edge>{Edge(0, 1)});
 }
 
-TEST(BridgeSearch, WithoutBridges) {
+TEST(BridgesSearch, WithoutBridges) {
   Graph graph{{}, {}, {3}, {1}, {0, 1}, {0, 2}};
-  ASSERT_EQ(BridgeSearch(graph), std::vector<edge>{});
+  ASSERT_EQ(BridgesSearch(graph), std::vector<Edge>{});
 }
 
-TEST(BridgeSearch, ThreeBridges) {
+TEST(BridgesSearch, ThreeBridges) {
   Graph graph{{8}, {2, 3, 4}, {4}, {4}, {5}, {6, 7, 8}, {7}, {}, {}};
-  std::vector<edge> result{edge(4, 5), edge(5, 8), edge(0, 8)};
-  ASSERT_EQ(BridgeSearch(graph), result);
+  std::vector<Edge> result{Edge(4, 5), Edge(5, 8), Edge(0, 8)};
+  ASSERT_EQ(BridgesSearch(graph), result);
 }
 
-TEST(BridgeSearch, TwoBridges) {
+TEST(BridgesSearch, TwoBridges) {
   Graph graph{{8}, {2, 3, 4}, {4}, {4}, {5}, {6, 7, 8}, {7}, {8}, {}};
-  std::vector<edge> result{edge(4, 5), edge(0, 8)};
-  ASSERT_EQ(BridgeSearch(graph), result);
+  std::vector<Edge> result{Edge(4, 5), Edge(0, 8)};
+  ASSERT_EQ(BridgesSearch(graph), result);
 }
 
-TEST(BridgeSearch, AllBridges) {
+TEST(BridgesSearch, AllBridges) {
   Graph graph{{1}, {2}, {3}, {}};
-  std::vector<edge> result{edge(2, 3), edge(1, 2), edge(0, 1)};
-  ASSERT_EQ(BridgeSearch(graph), result);
+  std::vector<Edge> result{Edge(2, 3), Edge(1, 2), Edge(0, 1)};
+  ASSERT_EQ(BridgesSearch(graph), result);
 }
 
-TEST(DotSearch, Simple) {
+TEST(DotsSearch, Simple) {
   Graph graph{{1}, {}, {1}};
-  ASSERT_EQ(DotSearch(graph), std::vector<int>{1});
+  ASSERT_EQ(DotsSearch(graph), std::vector<int>{1});
 }
 
-TEST(DotSearch, WithoutDots) {
+TEST(DotsSearch, WithoutDots) {
   Graph graph{{}, {}, {3}, {1}, {0, 1}, {0, 2}};
-  ASSERT_EQ(DotSearch(graph), std::vector<int>{});
+  ASSERT_EQ(DotsSearch(graph), std::vector<int>{});
 }
 
-TEST(DotSearch, ThreeDots) {
+TEST(DotsSearch, ThreeDots) {
   Graph graph{{8}, {2, 4}, {4}, {4}, {5}, {6, 7, 8}, {7}, {}, {}};
   std::vector<int> result{4, 5, 8};
-  ASSERT_EQ(DotSearch(graph), result);
+  ASSERT_EQ(DotsSearch(graph), result);
 }
 
-TEST(DotSearch, TwoDots) {
+TEST(DotsSearch, TwoDots) {
   Graph graph{{8}, {2, 3, 4}, {4}, {4}, {5}, {6, 7, 8}, {7}, {}, {}};
   std::vector<int> result{4, 5, 8};
-  ASSERT_EQ(DotSearch(graph), result);
+  ASSERT_EQ(DotsSearch(graph), result);
 }
 
-TEST(DotSearch, AllDots) {
+TEST(DotsSearch, AllDots) {
   Graph graph{{1}, {2}, {3}, {}};
   std::vector<int> result{1, 2};
-  ASSERT_EQ(DotSearch(graph), result);
+  ASSERT_EQ(DotsSearch(graph), result);
 }

@@ -1,10 +1,12 @@
 #include <vector>
 
-struct edge {
+struct Edge {
   int start;
   int end;
   int cost;
-  edge(int start, int end, int cost) : start(start), end(end), cost(cost) {}
+  Edge(int start, int end, int cost) : start(start), end(end), cost(cost) {}
 };
 
-std::vector<std::vector<int>> Johnson_algorithm(const std::vector<edge>& graph, int vertexes_count);
+// Johnson's algorithm
+std::vector<std::vector<int>> FindShortestPathes(const std::vector<Edge>& graph,
+                                                 int vertexes_count);

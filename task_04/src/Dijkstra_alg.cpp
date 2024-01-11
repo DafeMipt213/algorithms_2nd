@@ -3,12 +3,12 @@
 #include <limits>
 #include <set>
 
-int Dijkstra_alg(const Graph& graph, int start, int end) {
+int DijkstraAlgorithm(const Graph& graph, int start, int end) {
   const int inf = std::numeric_limits<int>::max();
   std::vector<int> distances(graph.size(), inf);
   distances[start] = 0;
-  std::set<vertex> queue;
-  queue.insert(vertex(start, distances.at(0)));
+  std::set<Vertex> queue;
+  queue.insert(Vertex(start, distances.at(0)));
 
   while (!queue.empty()) {
     int temp_vert = queue.begin()->number;
@@ -21,9 +21,9 @@ int Dijkstra_alg(const Graph& graph, int start, int end) {
       int distance = graph.at(temp_vert).at(i).distance;
 
       if (distances.at(temp_vert) + distance < distances.at(destination)) {
-        queue.erase(vertex(destination, distances.at(destination)));
+        queue.erase(Vertex(destination, distances.at(destination)));
         distances[destination] = distances.at(temp_vert) + distance;
-        queue.insert(vertex(destination, distances.at(destination)));
+        queue.insert(Vertex(destination, distances.at(destination)));
       }
     }
   }

@@ -1,8 +1,8 @@
 #include <vector>
 
-class SolveRMQ {
+class RmqSolver {
  public:
-  SolveRMQ(const std::vector<int>& data);
+  RmqSolver(const std::vector<int>& data);
   int GitMinimum(size_t start, size_t end);
 
  private:
