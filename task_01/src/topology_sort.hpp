@@ -47,7 +47,7 @@ void Graph<T>::DFS(T vertex) {
 
 template <typename T>
 std::vector<T> Graph<T>::TopologySort() {
-  for (auto &[vertex, other_vertexes] : adjacency_map_) {
+  for (auto& [vertex, other_vertexes] : adjacency_map_) {
     if (colors_[vertex] == kWhite) DFS(vertex);
   }
 
