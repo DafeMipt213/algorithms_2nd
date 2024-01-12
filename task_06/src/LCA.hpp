@@ -19,9 +19,9 @@ class BinaryTree {
 
   void destroy_tree();
   void destroy_tree(Node *leaf);
-  void dfs_inner(int current_height, Node *current_vertex);
+  void dfs_inner(int current_height, Node *current_vertex, int &cnt);
   void dfs();
-  int findMin(int value1, int value2);
+  int findAncestor(int value1, int value2);
   void makeRmq();
 
   std::vector<int> heights;
