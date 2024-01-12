@@ -6,6 +6,6 @@ class RmqSolver {
   int GitMinimum(size_t start, size_t end);
 
  private:
-  std::vector<std::vector<int>> SparseTable;
+  std::vector<std::vector<int>> sparse_table;
   int GetLog(int len);
 };
