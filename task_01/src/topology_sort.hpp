@@ -14,7 +14,8 @@ class Graph {
   std::unordered_map<size_t, Node> nodes;
   void countIncoming();
   Graph(std::vector<Node> nodes) {
-    for (size_t i = 0; i < nodes.size(); ++i) this->nodes[nodes[i].id] = nodes[i];
+    for (size_t i = 0; i < nodes.size(); ++i)
+      this->nodes[nodes[i].id] = nodes[i];
     countIncoming();
   }
 };

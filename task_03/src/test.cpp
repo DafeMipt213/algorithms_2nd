@@ -1,12 +1,13 @@
 
 #include <gtest/gtest.h>
+
 #include "johnson.hpp"
-void testJohnson(std::vector<int> example, Graph& TestGraph, int ind1,
-                int ind2, int weight) {
-std::pair<std::vector<size_t>, int> ans = Johnson(TestGraph, ind1, ind2);
-for (int i = 0; i < ans.first.size(); ++i)
+void testJohnson(std::vector<int> example, Graph& TestGraph, int ind1, int ind2,
+                 int weight) {
+  std::pair<std::vector<size_t>, int> ans = Johnson(TestGraph, ind1, ind2);
   for (int i = 0; i < ans.first.size(); ++i)
-    ASSERT_EQ(example[i], ans.first[i]);
+    for (int i = 0; i < ans.first.size(); ++i)
+      ASSERT_EQ(example[i], ans.first[i]);
   ASSERT_EQ(ans.second, weight);
 }
 
@@ -25,4 +26,3 @@ TEST(Johnson, Normal1) {
   std::vector<int> ans = {1, 2, 3, 4};
   testJohnson(ans, TestGraph, 1, 4, 1);
 }
-

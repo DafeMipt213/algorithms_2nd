@@ -1,11 +1,11 @@
 
 #include <gtest/gtest.h>
+
 #include "net.hpp"
 
 TEST(Nets, Simple) {
   std::vector<Node*> nodes;
-  for (int i = 0; i <= 8; ++i)
-    nodes.push_back(new Node(i));
+  for (int i = 0; i <= 8; ++i) nodes.push_back(new Node(i));
   nodes[0]->setNodes({nodes[1], nodes[2]});
   nodes[1]->setNodes({nodes[0], nodes[2]});
   nodes[2]->setNodes({nodes[1], nodes[0], nodes[3]});

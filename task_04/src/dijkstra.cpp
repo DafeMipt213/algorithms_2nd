@@ -10,7 +10,6 @@ std::vector<size_t> makeAnswer(Graph& graph, size_t start, size_t finish) {
   while (current_node != -1) {
     tmp_path.push(current_node);
     current_node = graph.nodes[current_node].prevIndex;
-
   }
 
   while (!tmp_path.empty()) {
@@ -20,7 +19,8 @@ std::vector<size_t> makeAnswer(Graph& graph, size_t start, size_t finish) {
   return answer;
 }
 
-std::vector<size_t> Dijkstra::findPath(Graph& graph, size_t start, size_t finish) {
+std::vector<size_t> Dijkstra::findPath(Graph& graph, size_t start,
+                                       size_t finish) {
   graph.init();
   std::multimap<size_t, size_t> min_weight_map;
   graph.nodes[start].weight = 0;
