@@ -52,7 +52,7 @@ std::vector<std::vector<int>> jonson(
     result[i].resize(graph.size(), INF);
   }
   graph.push_back(extra_vertex);
-  std::vector<int> d(static_cast<size_t>(graph.size()));
+  std::vector<int> d(static_cast<int>(graph.size()));
 
   if (fordBellman(graph.size(), graph, d) == 0) {
     throw std::runtime_error("negative cycle");

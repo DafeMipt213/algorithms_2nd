@@ -24,7 +24,7 @@ void innerFindBridges(const std::vector<std::vector<int>>& graph, int time,
 
 std::set<std::pair<int, int>> findBridges(
     const std::vector<std::vector<int>>& graph) {
-  int time = 0;
+  const int time = 0;
   std::vector<int> tin(graph.size());
   std::vector<int> ret(graph.size());
   std::vector<int> colors(graph.size());
@@ -60,7 +60,7 @@ void innerFindCutPoints(const std::vector<std::vector<int>>& graph, int time,
 }
 
 std::set<int> findCutPoints(const std::vector<std::vector<int>>& graph) {
-  int time = 0;
+  const int time = 0;
   std::vector<int> tin(graph.size());
   std::vector<int> ret(graph.size());
   std::vector<int> colors(graph.size());

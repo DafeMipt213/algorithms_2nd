@@ -1,5 +1,7 @@
 #include "topology_sort.hpp"
 
+#include <utility>
+
 void Graph::dfs(int vertex) {
   tin[vertex] = timer++;
   colors[vertex] = 1;
@@ -48,7 +50,7 @@ std::vector<int> Graph::topologySort(int vertex) {
 }
 
 Graph::Graph(std::vector<std::vector<int>> new_graph)
-    : graph_list(new_graph), timer(0) {
+    : graph_list(std::move(new_graph)), timer(0) {
   tin.resize(graph_list.size());
   tout.resize(graph_list.size());
   colors.resize(graph_list.size());

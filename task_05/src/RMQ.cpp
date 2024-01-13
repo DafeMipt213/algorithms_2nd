@@ -19,10 +19,10 @@ RMQ::RMQ(const std::vector<int>& input_vector) {
   const size_t pow_len = static_cast<size_t>(std::pow(2, pow));
   std::vector<TableElement> first_row;
   for (size_t i = 0; i < input_vector.size(); ++i) {
-    first_row.push_back(TableElement(input_vector[i], i));
+    first_row.push_back(TableElement(input_vector[i], static_cast<int>(i)));
   }
   for (size_t i = input_vector.size(); i < pow_len; ++i) {
-    first_row.push_back(TableElement(__INT_MAX__, i));
+    first_row.push_back(TableElement(__INT_MAX__, static_cast<int>(i)));
   }
   minimum_table.push_back(first_row);
   int curr_pow = 1;
