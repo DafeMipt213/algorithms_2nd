@@ -1,8 +1,6 @@
 #pragma once
 
-#include <limits.h>
-
-#include <iostream>
+#include <limits>
 #include <vector>
 
 int VertexWithShortestDistance(std::vector<long long> &dist,

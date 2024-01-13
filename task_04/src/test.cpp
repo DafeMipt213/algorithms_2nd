@@ -18,7 +18,9 @@ TEST(algorithm_dijkstra, Medium) {
 TEST(algorithm_dijkstra, Empty) {
   std::vector<std::vector<int>> graph{
       {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}};
-  std::vector<long long> result{0, INT_MAX, INT_MAX, INT_MAX};
+  std::vector<long long> result{0, std::numeric_limits<long long>::max(),
+                                std::numeric_limits<long long>::max(),
+                                std::numeric_limits<long long>::max()};
   ASSERT_EQ(Dijkstra(graph, 0), result);
 }
 
@@ -64,5 +66,25 @@ TEST(algorithm_dijkstra, BigMatrix) {
                                       {34, 75, 41, 79, 21, 41, 80, 25, 97, 58},
                                       {36, 92, 7, 87, 35, 90, 17, 26, 65, 95}};
   std::vector<long long> result{0, 40, 49, 18, 33, 18, 36, 27, 22, 42};
+  ASSERT_EQ(Dijkstra(graph, 0), result);
+}
+
+TEST(algorithm_dijkstra, PythonTestFirst) {
+  std::vector<std::vector<int>> graph{{5, 9, 6, 5, 9},
+                                      {2, 3, 3, 7, 7},
+                                      {0, 2, 10, 10, 3},
+                                      {5, 1, 10, 4, 4},
+                                      {6, 6, 9, 8, 6}};
+  std::vector<long long> result{0, 6, 6, 5, 9};
+  ASSERT_EQ(Dijkstra(graph, 0), result);
+}
+
+TEST(algorithm_dijkstra, PythonTestSecond) {
+  std::vector<std::vector<int>> graph{{75, 68, 76, 93, 41},
+                                      {93, 37, 68, 85, 29},
+                                      {55, 4, 81, 57, 73},
+                                      {58, 6, 18, 31, 83},
+                                      {18, 77, 39, 41, 32}};
+  std::vector<long long> result{0, 68, 76, 82, 41};
   ASSERT_EQ(Dijkstra(graph, 0), result);
 }
