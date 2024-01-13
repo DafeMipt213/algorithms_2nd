@@ -2,7 +2,7 @@
 
 #include "rmq.hpp"
 
-TEST(TopologySort, Simple) {
+TEST(RMQ, Simple) {
   std::vector<int> graph{1, 2, 3, 4, 5, 6, 7, 8, 10};
   ASSERT_EQ(RMQ(0, 5, graph), 0);
 }
@@ -53,8 +53,28 @@ TEST(RMQ, GenericTestFirst) {
   ASSERT_EQ(RMQ(3, 15, graph), 8);
 }
 
-TEST(RMQ, PythonTest) {
+TEST(RMQ, GenericTestSecond) {
+  std::vector<int> graph{1, 3, 5, 7, 9, 2, 4, 6, 8, 10};
+  ASSERT_EQ(RMQ(5, 9, graph), 5);
+}
+
+TEST(RMQ, GenericTestThird) {
+  std::vector<int> graph{10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+  ASSERT_EQ(RMQ(0, 9, graph), 9);
+}
+
+TEST(RMQ, PythonTestFirst) {
   std::vector<int> graph{-19, 3, -92, -86, 88, -53, -58,
                          -36, 7, 82,  -52, 90, -57, 48};
   ASSERT_EQ(RMQ(3, 7, graph), 3);
+}
+
+TEST(RMQ, PythonTestSecond) {
+  std::vector<int> graph{2, 0, 9, 5, 4, 7, 1, 6, 8, 3};
+  ASSERT_EQ(RMQ(5, 8, graph), 6);
+}
+
+TEST(RMQ, PythonTestThird) {
+  std::vector<int> graph{17, 30, 63, 88, 61, 58, 4, 49, 37, 64};
+  ASSERT_EQ(RMQ(3, 6, graph), 6);
 }
