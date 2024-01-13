@@ -7,7 +7,7 @@ void innerFindBridges(const std::vector<std::vector<int>>& graph, int time,
   tin[vertex] = ++time;
   ret[vertex] = time;
   colors[vertex] = 1;
-  for (int i = 0; i < graph[vertex].size(); ++i) {
+  for (size_t i = 0; i < graph[vertex].size(); ++i) {
     if (graph[vertex][i] == parent) continue;
     if (colors[graph[vertex][i]] > 0)
       ret[vertex] = std::min(ret[vertex], tin[graph[vertex][i]]);
