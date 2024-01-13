@@ -4,11 +4,11 @@
 using namespace std;
 
 const int borne = 201 * 1000;
-int nbNodes, nbEdges;
+int nodes, edges;
 
 vector<int> adj[borne];
 bool vu[borne];
-vector<pair<int, int>> ivComp;
+vector<pair<int, int>> comp;
 
 void Dfs(int nod, int& weaker, int& bigger) {
   vu[nod] = true;
@@ -25,8 +25,8 @@ int main() {
   ios::sync_with_stdio(false);
   cin.tie(0);
 
-  cin >> nbNodes >> nbEdges;
-  for (int iEdge = 0; iEdge < nbEdges; ++iEdge) {
+  cin >> nodes >> edges;
+  for (int edge = 0; edge < edges; ++edge) {
     int u, v;
     cin >> u >> v;
     --u;
@@ -35,22 +35,22 @@ int main() {
     adj[v].push_back(u);
   }
 
-  for (int nod = 0; nod < nbNodes; ++nod) {
+  for (int nod = 0; nod < nodes; ++nod) {
     if (!vu[nod]) {
       int weaker = nod, bigger = nod;
       Dfs(nod, weaker, bigger);
-      ivComp.emplace_back(weaker, bigger);
+      comp.emplace_back(weaker, bigger);
     }
   }
 
-  int curEnd = -1;
+  int end = -1;
   int rep = 0;
 
-  for (auto comp : ivComp) {
-    if (comp.first <= curEnd) {
+  for (auto comp : comp) {
+    if (comp.first <= end) {
       ++rep;
     }
-    curEnd = max(curEnd, comp.second);
+    end = max(end, comp.second);
   }
 
   cout << rep << "\n";
