@@ -13,6 +13,7 @@ int main() {
   G.Add(4, 6);
   std::vector<std::pair<int, int>> b;
   std::vector<int> c;
+
   for (auto v : b)
     std::cout << v.first << " " << v.second << std::endl;
   std::cout << std::endl;
