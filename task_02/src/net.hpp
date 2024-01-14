@@ -1,6 +1,6 @@
 #include <algorithm>
+#include <set>
 #include <vector>
-
 struct Node {
   int id;
   std::vector<Node*> nodes;
@@ -11,8 +11,8 @@ struct Node {
 
 class Net {
  public:
-  std::vector<int> weak_routers;
-  std::vector<std::pair<int, int>> weak_nets;
+  std::set<size_t> weak_routers;
+  std::vector<std::pair<size_t, size_t>> weak_nets;
   void dfs(Node* v, Node* p = nullptr, int timer = 0);
   Net(std::vector<Node*> routers);
 

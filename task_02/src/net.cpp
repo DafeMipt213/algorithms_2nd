@@ -13,13 +13,13 @@ void Net::dfs(Node* v, Node* p, int timer) {
       dfs(to, v, timer);
       fup[v->id] = std::min(fup[v->id], fup[to->id]);
       if (fup[to->id] >= tin[v->id]) {
-        weak_nets.push_back({v->id, to->id});
-        if (p != nullptr) weak_routers.push_back(v->id);
+        if (fup[to->id] != tin[v->id]) weak_nets.push_back({v->id, to->id});
+        if (p != nullptr) weak_routers.insert(v->id);
         ++children;
       }
     }
   }
-  if (p == nullptr && children > 1) weak_routers.push_back(v->id);
+  if (p == nullptr && children > 1) weak_routers.insert(v->id);
 }
 Net::Net(std::vector<Node*> routers) {
   nodes = routers;
@@ -31,5 +31,4 @@ void Net::init() {
     tin.push_back(0);
     fup.push_back(0);
   }
-}
-;
+};
