@@ -16,13 +16,7 @@
 ## 2. [Обход в глубину.](https://foxford.ru/wiki/informatika/algoritm-poiska-v-glubinu?ysclid=lral2i7bko674812959) [Цвета вершин.](https://neerc.ifmo.ru/wiki/index.php?title=%D0%9E%D0%B1%D1%85%D0%BE%D0%B4_%D0%B2_%D0%B3%D0%BB%D1%83%D0%B1%D0%B8%D0%BD%D1%83,_%D1%86%D0%B2%D0%B5%D1%82%D0%B0_%D0%B2%D0%B5%D1%80%D1%88%D0%B8%D0%BD) [Времена входа и выхода.](https://algorithmica.org/tg/dfs-plus?ysclid=lralfk6nf47276056) [Лемма о белых путях(с доказательством).](https://neerc.ifmo.ru/wiki/index.php?title=%D0%9B%D0%B5%D0%BC%D0%BC%D0%B0_%D0%BE_%D0%B1%D0%B5%D0%BB%D1%8B%D1%85_%D0%BF%D1%83%D1%82%D1%8F%D1%85) 
 ## 3. [Проверка связности неориентированного графа.](https://neerc.ifmo.ru/wiki/index.php?title=%D0%98%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5_%D0%BE%D0%B1%D1%85%D0%BE%D0%B4%D0%B0_%D0%B2_%D0%B3%D0%BB%D1%83%D0%B1%D0%B8%D0%BD%D1%83_%D0%B4%D0%BB%D1%8F_%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B8_%D1%81%D0%B2%D1%8F%D0%B7%D0%BD%D0%BE%D1%81%D1%82%D0%B8) Поиск цикла в [неориентированном](https://e-maxx.ru/algo/finding_cycle) и [ориентированном графе.](https://foxford.ru/wiki/informatika/algoritm-poiska-v-glubinu?ysclid=lral2i7bko674812959) [Топологическая сортировка.](https://algorithmica.org/tg/dfs-plus?ysclid=lralfk6nf47276056)
 ## 4. Нахождение компонент сильной связности. [Алгоритм Косарайю с доказательством корректности(концепция).](https://habr.com/ru/articles/537290/) [Алгоритм Тарьяна](https://habr.com/ru/articles/709096/) без доказательства корректности.
-## 5. Компоненты реберной двусвязности. Мосты. Поиск мостов.
-Поиск мостов: https://e-maxx.ru/algo/bridge_searching
-## 6. Компоненты вершинной двусвязности. Точки сочленения. Поиск точек сочленения.
-Поиск точек сочленения: https://e-maxx.ru/algo/cutpoints
-## 7. Волновой алгоритм. Обход в ширину (применение очереди в волновом алгоритме).
-Волновой алгоритм: https://suvitruf.ru/2012/05/13/1176/volnovoj-algoritm-algoritm-li/?ysclid=lrap9080ug65323828  
-Обход в ширину: https://habr.com/ru/articles/661577/
-## 8. Критерий существования Эйлерова пути и цикла в ориентированном и неориентированном графе. Поиск эйлерова пути и цикла.
-Критерий существования Эйлерова пути и цикла в ориентированном и неориентированном графе: https://neerc.ifmo.ru/wiki/index.php?title=%D0%AD%D0%B9%D0%BB%D0%B5%D1%80%D0%BE%D0%B2%D0%BE%D1%81%D1%82%D1%8C_%D0%B3%D1%80%D0%B0%D1%84%D0%BE%D0%B2  
-Поиск эйлерова пути: https://neerc.ifmo.ru/wiki/index.php?title=%D0%90%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC_%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D1%8F_%D0%AD%D0%B9%D0%BB%D0%B5%D1%80%D0%BE%D0%B2%D0%B0_%D1%86%D0%B8%D0%BA%D0%BB%D0%B0
+## 5. [Компоненты реберной двусвязности. Мосты. Поиск мостов.](https://e-maxx.ru/algo/bridge_searching)
+## 6. [Компоненты вершинной двусвязности. Точки сочленения. Поиск точек сочленения.](https://e-maxx.ru/algo/cutpoints)
+## 7. [Волновой алгоритм.](https://suvitruf.ru/2012/05/13/1176/volnovoj-algoritm-algoritm-li/?ysclid=lrap9080ug65323828) [Обход в ширину](https://habr.com/ru/articles/661577/) (применение очереди в волновом алгоритме).
+## 8. [Критерий существования Эйлерова пути и цикла в ориентированном и неориентированном графе.](https://neerc.ifmo.ru/wiki/index.php?) [Поиск эйлерова пути и цикла.](title=%D0%90%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC_%D0%BF%D0%BE%D1%81%D1%82%D1%80%D0%BE%D0%B5%D0%BD%D0%B8%D1%8F_%D0%AD%D0%B9%D0%BB%D0%B5%D1%80%D0%BE%D0%B2%D0%B0_%D1%86%D0%B8%D0%BA%D0%BB%D0%B0)
