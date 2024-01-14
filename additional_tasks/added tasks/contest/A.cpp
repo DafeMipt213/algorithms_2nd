@@ -46,14 +46,14 @@ int main() {
     graph[n + i].insert(2 * n + 1);
   }
   bool path_found = 0;
-  int ans = 0;
+  int answer = 0;
   DFS(0, n, graph, used);
   for (int i = 0; i < m; i++) {
     int a, b;
     std::cin >> a >> b;
     if (graph[a].find(b + n) != graph[a].end() ||
         graph[b + n].find(a) != graph[b + n].end()) {
-      std::cout << n - ans << ' ';
+      std::cout << n - answer << ' ';
       continue;
     }
     graph[a].insert(b + n);
@@ -62,7 +62,7 @@ int main() {
     }
     if (path_found) {
       used.assign(2 * n + 2, false);
-      ans++;
+      answer++;
       FindPath(0, n, graph, used, current_path, path);
       graph[path.top()].erase(2 * n + 1);
       int last = path.top();
@@ -78,7 +78,7 @@ int main() {
       used.assign(2 * n + 2, false);
       path_found = DFS(0, n, graph, used);
     }
-    std::cout << n - ans << ' ';
+    std::cout << n - answer << ' ';
   }
   std::cout << "\n";
   return 0;
