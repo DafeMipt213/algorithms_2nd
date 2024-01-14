@@ -1,3 +1,7 @@
 #include <iostream>
+#include <vector>
 
-int main() { return 0; }
+#include "Deijkstra.hpp"
+#include "Johnson.hpp"
+
+int main() {}

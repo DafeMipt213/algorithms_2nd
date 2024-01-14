@@ -1,3 +1,8 @@
 #include <iostream>
+#include <vector>
 
-int main() { return 0; }
+#include "Deijkstra.hpp"
+
+using namespace std;
+
+int main() {}
