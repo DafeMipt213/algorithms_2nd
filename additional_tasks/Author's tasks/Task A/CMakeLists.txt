@@ -17,10 +17,8 @@ list(REMOVE_ITEM test_source_list ${main_source_list})
 list(REMOVE_ITEM source_list ${test_list})
 
 include_directories(${PROJECT_NAME} PUBLIC src)
-include_directories(${PROJECT_NAME} PUBLIC ../lib/src)
 
-add_executable(${PROJECT_NAME} ${source_list})
-target_link_libraries(${PROJECT_NAME} PUBLIC Utils)
+add_executable(${PROJECT_NAME} ${source_list} ${lib_source_list})
 
 # Locate GTest
 enable_testing()
@@ -32,7 +30,6 @@ add_executable(${PROJECT_NAME}_tests ${test_source_list})
 target_link_libraries(
   ${PROJECT_NAME}_tests
   GTest::gtest_main
-  Utils
 )
 
 include(GoogleTest)
