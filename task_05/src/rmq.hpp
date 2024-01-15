@@ -32,10 +32,9 @@ class Solution {
   void DFS(int vertex, int parent, int current_height);
   void BuildLCA();
   int LCAInBlock(int b, int l, int r);
-  int Log2(int value) { return 31 - __builtin_clz(value); }
 
  public:
-  Solution(std::vector<int> &data);
+  explicit Solution(const std::vector<int> &data);
   int LCA(int v, int u);
   int RMQ(int left, int right);
 };

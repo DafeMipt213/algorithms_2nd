@@ -1,6 +1,6 @@
 #include "rmq.hpp"
 
-Solution::Solution(std::vector<int> &data) {
+Solution::Solution(const std::vector<int> &data) {
   int size = data.size();
   heights_.assign(size, 0);
   eulerian_tour_.reserve(2 * size);
@@ -117,7 +117,7 @@ int Solution::LCA(int v, int u) {
   int answer = MinHeight(answer_l, answer_r);
 
   if (block_l + 1 < block_r) {
-    int l = log_2_[block_r - block_l - 1];
+    l = log_2_[block_r - block_l - 1];
     int answer3 = sparse_table_[block_l + 1][l];
     int answer4 = sparse_table_[block_r - (1 << l)][l];
     answer = MinHeight(answer, MinHeight(answer3, answer4));

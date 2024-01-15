@@ -30,7 +30,6 @@ class Solution {
   int LCAInBlock(int b, int l, int r);
 
  public:
-  Solution(std::vector<int> &data);
   Solution(std::map<T, std::vector<T>> &data, T root);
   int LCA(T v, T u);
 };
@@ -145,7 +144,7 @@ int Solution<T>::LCA(T v, T u) {
   int answer = MinHeight(answer_l, answer_r);
 
   if (block_l + 1 < block_r) {
-    int l = log_2_[block_r - block_l - 1];
+    l = log_2_[block_r - block_l - 1];
     int answer3 = sparse_table_[block_l + 1][l];
     int answer4 = sparse_table_[block_r - (1 << l)][l];
     answer = MinHeight(answer, MinHeight(answer3, answer4));

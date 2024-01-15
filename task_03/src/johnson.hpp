@@ -22,7 +22,7 @@ class Graph {
 
  public:
   Graph() = default;
-  Graph(std::vector<int> vertexes) : vertexes_(vertexes){};
+  explicit Graph(const std::vector<int> &&vertexes) : vertexes_(vertexes){};
   ~Graph() = default;
 
   void AddEdge(int from, int to, long long weight);

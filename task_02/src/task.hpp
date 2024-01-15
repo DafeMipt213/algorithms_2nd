@@ -15,7 +15,7 @@ class Graph {
  public:
   Graph() = default;
   ~Graph() = default;
-  void SetAdjacencyMap(std::map<T, std::vector<T>> adjacency_map);
+  void SetAdjacencyMap(std::map<T, std::vector<T>> &&adjacency_map);
   void AddEdge(T from, T to);
   void DFS(T vertex, T start_vertex, std::map<T, int> &d, bool is_root);
   void CalculateSolution();
@@ -24,7 +24,7 @@ class Graph {
 };
 
 template <typename T>
-void Graph<T>::SetAdjacencyMap(std::map<T, std::vector<T>> adjacency_map) {
+void Graph<T>::SetAdjacencyMap(std::map<T, std::vector<T>> &&adjacency_map) {
   adjacency_map_ = adjacency_map;
 }
 
@@ -56,7 +56,7 @@ void Graph<T>::AddEdge(T from, T to) {
   if (std::find(adjacency_map_[to].begin(), adjacency_map_[to].end(), from) ==
       adjacency_map_[to].end())
     adjacency_map_[to].push_back(from);
-  if (adjacency_map_.find(to) == adjacency_map_.end()) adjacency_map_[to] = {};
+  adjacency_map_.try_emplace(to, std::vector<T>());
 }
 
 template <typename T>
