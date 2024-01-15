@@ -1,0 +1,118 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+const int N = 5555;
+
+// The graph of dependencies.
+bool graph[N][N];
+// The tree.
+vector<int> tree[N];
+// Vertices that have i-th source color.
+vector<int> for_src[N];
+// Topological sort order.
+vector<int> order;
+bool cycle = false;
+int was[N];
+// The color that the i-th vertex must have at the end.
+int color[N];
+// The color of the i-th source.
+int src[N];
+// The number of vertices in the tree.
+int n;
+
+bool dfs(int v, int root) {
+  was[v] = 1;
+  if (src[v] == color[root]) return true;
+  bool on_path = false;
+  for (int i = 0; i < tree[v].size(); i++) {
+    int to = tree[v][i];
+    if (was[to] == 0) on_path |= dfs(to, root);
+  }
+  if (!on_path) return false;
+  if (src[v] >= 0 && src[v] != color[root]) {
+    for (int i = 0; i < for_src[src[v]].size(); i++) {
+      // other must be painted before the root.
+      // An edge from the root to other is added.
+      int other = for_src[src[v]][i];
+      graph[root][other] = true;
+    }
+  }
+  if (color[v] >= 0 && color[v] != color[root]) {
+    // v must be painted after the root.
+    // An edge from v to the root is added.
+    graph[v][root] = true;
+  }
+  return true;
+}
+
+void dfs_top_sort(int v) {
+  was[v] = 1;
+  for (int to = 0; to < n; to++) {
+    if (graph[v][to] && was[to] == 0)
+      dfs_top_sort(to);
+    else if (graph[v][to] && was[to] == 1)
+      cycle = true;
+  }
+  was[v] = 2;
+  order.push_back(v);
+}
+
+int main() {
+  assert(freopen("input.txt", "r", stdin));
+  assert(freopen("output.txt", "w", stdout));
+
+  // Read the number of vertices.
+  assert(scanf("%d", &n) == 1);
+  fill(color, color + n, -1);
+  fill(src, src + n, -1);
+  // Read the edges of the tree.
+  for (int i = 0; i < n - 1; i++) {
+    int a, b;
+    assert(scanf("%d%d", &a, &b) == 2);
+    a--;
+    b--;
+    tree[a].push_back(b);
+    tree[b].push_back(a);
+  }
+  // Read the number of sources.
+  int src_cnt;
+  assert(scanf("%d", &src_cnt) == 1);
+  // Read sources and their colors.
+  for (int i = 0; i < src_cnt; i++) {
+    int v, src_color;
+    assert(scanf("%d%d", &v, &src_color) == 2);
+    v--;
+    src_color--;
+    src[v] = src_color;
+  }
+  // Read the number of vertices that must have a fixed color.
+  int fixed_color_cnt;
+  assert(scanf("%d", &fixed_color_cnt) == 1);
+  // Read these vertices and their colors.
+  for (int i = 0; i < fixed_color_cnt; i++) {
+    int v, final_color;
+    assert(scanf("%d%d", &v, &final_color) == 2);
+    v--;
+    final_color--;
+    color[v] = final_color;
+    for_src[final_color].push_back(v);
+  }
+  // Build the graph of dependencies.
+  for (int i = 0; i < n; i++) {
+    if (color[i] >= 0) {
+      fill(was, was + n, 0);
+      dfs(i, i);
+    }
+  }
+  // Check if the graph of dependencies is acyclic.
+  fill(was, was + n, 0);
+  for (int i = 0; i < n; i++)
+    if (was[i] == 0) dfs_top_sort(i);
+  if (cycle)
+    puts("NO");
+  else
+    puts("YES");
+
+  return 0;
+}
