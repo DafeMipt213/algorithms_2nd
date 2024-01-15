@@ -1,6 +1,7 @@
 #include "topology_sort.hpp"
 
 #include <vector>
+#include <algorithm>
 
 #include "topology_sort.hpp"
 
