@@ -39,8 +39,8 @@ std::vector<std::vector<Vertex>> prim(
           if (!colors[graph[i][j].destination]) {
             if (min > graph[i][j].weight) {
               min = graph[i][j].weight;
-              x = i;
-              y = j;
+              x = static_cast<int>(i);
+              y = static_cast<int>(j);
             }
           }
         }
