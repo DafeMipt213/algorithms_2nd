@@ -1,3 +1,5 @@
 #include <iostream>
 
-int main() { return 0; }
+#include "LCA.hpp"
+
+int main() {}
