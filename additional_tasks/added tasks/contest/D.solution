@@ -1,0 +1,200 @@
+#include <assert.h>
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+
+#include <algorithm>
+#include <bitset>
+#include <deque>
+#include <iomanip>
+#include <iostream>
+#include <map>
+#include <queue>
+#include <set>
+#include <stack>
+#include <string>
+#include <tuple>
+#include <vector>
+//
+#pragma comment(linker, "/STACK:256000000")
+
+using namespace std;
+
+typedef long long int ll;
+typedef long double ld;
+
+const int INF = 1000 * 1000 * 1000 + 21;
+const ll LLINF = (1ll << 60) + 5;
+const int MOD = 1000 * 1000 * 1000 + 7;
+
+const int MAX_N = 1000 * 1000 + 228;
+
+int n, m, k;
+int cl[MAX_N];
+vector<int> g[MAX_N];
+vector<pair<int, int>> g_cl[MAX_N];
+vector<int> vr[MAX_N];
+pair<int, int> comp[MAX_N];
+bool is_bad[MAX_N];
+int comp_sz[MAX_N];
+bool used[MAX_N];
+bool alive_now[MAX_N];
+vector<pair<pair<int, int>, pair<int, int>>> edges[MAX_N];
+vector<pair<int, int>> ng[2 * MAX_N][2];
+int nused[2 * MAX_N][2];
+int ncl[2 * MAX_N][2];
+int nused_iter = 0;
+
+bool dfs_check(int v, int c, int comp_id) {
+  used[v] = true;
+  comp[v] = {comp_id, c};
+
+  for (int u : g[v]) {
+    assert(cl[v] == cl[u]);
+    if (!used[u]) {
+      if (!dfs_check(u, (c ^ 1), comp_id)) {
+        return false;
+      }
+    } else {
+      if (comp[v].second == comp[u].second) {
+        return false;
+      }
+    }
+  }
+
+  return true;
+}
+
+bool dfs_ncheck(int v, int cv, int c) {
+  nused[v][cv] = nused_iter;
+  ncl[v][cv] = c;
+
+  if (nused[v][cv ^ 1] != nused_iter) {
+    if (!dfs_ncheck(v, (cv ^ 1), (c ^ 1))) {
+      return false;
+    }
+  } else {
+    if (ncl[v][cv] == ncl[v][cv ^ 1]) {
+      return false;
+    }
+  }
+
+  for (auto& [u, cu] : ng[v][cv]) {
+    if (nused[u][cu] != nused_iter) {
+      if (!dfs_ncheck(u, cu, (c ^ 1))) {
+        return false;
+      }
+    } else {
+      if (ncl[v][cv] == ncl[u][cu]) {
+        return false;
+      }
+    }
+  }
+
+  return true;
+}
+
+int main() {
+#ifdef CH_EGOR
+  freopen("input.txt", "r", stdin);
+  // freopen("output.txt", "w", stdout);
+#else
+  // freopen("", "r", stdin);
+  // freopen("", "w", stdout);
+#endif
+
+  scanf("%d%d%d", &n, &m, &k);
+  for (int i = 0; i < n; ++i) {
+    scanf("%d", &cl[i]);
+    --cl[i];
+    vr[cl[i]].push_back(i);
+  }
+
+  for (int i = 0; i < m; ++i) {
+    int v, u;
+    scanf("%d%d", &v, &u);
+    --v;
+    --u;
+
+    if (cl[v] == cl[u]) {
+      g[v].push_back(u);
+      g[u].push_back(v);
+    } else {
+      g_cl[cl[v]].push_back({v, u});
+      g_cl[cl[u]].push_back({u, v});
+    }
+  }
+
+  int cnt_bad = 0;
+  for (int i = 0; i < k; ++i) {
+    bool ok = true;
+    int comp_id = 0;
+    for (int v : vr[i]) {
+      if (!used[v]) {
+        ok &= dfs_check(v, 0, comp_id++);
+      }
+      if (!ok) {
+        break;
+      }
+    }
+    comp_sz[i] = comp_id;
+    is_bad[i] = !ok;
+    cnt_bad += !ok;
+  }
+
+  ll ans = 0;
+  int pre_bad = 0;
+  for (int i = 0; i < k; ++i) {
+    if (is_bad[i]) {
+      ++pre_bad;
+      continue;
+    }
+
+    vector<int> alive_cl;
+    for (auto [v, u] : g_cl[i]) {
+      assert(i == cl[v]);
+      assert(i != cl[u]);
+      if (!is_bad[cl[u]] && i < cl[u]) {
+        if (!alive_now[cl[u]]) {
+          alive_now[cl[u]] = true;
+          alive_cl.push_back(cl[u]);
+        }
+        edges[cl[u]].push_back({comp[v], comp[u]});
+      }
+    }
+
+    ans += k - i - 1 - cnt_bad + pre_bad;
+    for (int c : alive_cl) {
+      for (auto& [v, u] : edges[c]) {
+        ng[v.first][v.second].push_back({u.first + comp_sz[i], u.second});
+        ng[u.first + comp_sz[i]][u.second].push_back({v.first, v.second});
+      }
+
+      ++nused_iter;
+      bool ok = true;
+      for (auto& [v, u] : edges[c]) {
+        if (nused[v.first][v.second] != nused_iter) {
+          ok &= dfs_ncheck(v.first, v.second, 0);
+          if (!ok) {
+            break;
+          }
+        }
+      }
+
+      ans -= !ok;
+
+      for (auto& [v, u] : edges[c]) {
+        ng[v.first][v.second].clear();
+        ng[u.first + comp_sz[i]][u.second].clear();
+      }
+      alive_now[c] = false;
+      edges[c].clear();
+    }
+  }
+
+  printf("%lld\n", ans);
+
+  return 0;
+}
