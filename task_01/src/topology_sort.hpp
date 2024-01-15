@@ -15,7 +15,7 @@ class Graph {
   void DFS(T vertex, std::map<T, Colors> &visited, std::stack<T> &stack);
 
  public:
-  Graph(int count_of_verticles);
+  explicit Graph(int count_of_verticles);
   std::vector<T> TopologicalSort();
   void AddEdge(T first_verticle, T second_verticle);
   void FillGraph(std::vector<std::vector<T>> graph);

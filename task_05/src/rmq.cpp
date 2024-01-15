@@ -12,7 +12,7 @@ void DFS(int v, int p, int h, AllData &data) {
   }
 }
 
-int MinimumHeights(int i, int j, AllData &data) {
+int MinimumHeights(int i, int j, const AllData &data) {
   return data.height[data.euler_bypass[i]] < data.height[data.euler_bypass[j]]
              ? i
              : j;
@@ -77,11 +77,11 @@ void Precompute(int root, AllData &data) {
   }
 }
 
-int LCABlock(int b, int l, int r, AllData &data) {
+int LCABlock(int b, int l, int r, const AllData &data) {
   return data.blocks[data.block_mask[b]][l][r] + b * data.block_size;
 }
 
-int LCA(int v, int u, AllData &data) {
+int LCA(int v, int u, const AllData &data) {
   int l = data.visited[v];
   int r = data.visited[u];
   if (l > r) std::swap(l, r);
@@ -94,7 +94,7 @@ int LCA(int v, int u, AllData &data) {
   int ans2 = LCABlock(br, 0, r % data.block_size, data);
   int ans = MinimumHeights(ans1, ans2, data);
   if (bl + 1 < br) {
-    int l = data.log2[br - bl - 1];
+    l = data.log2[br - bl - 1];
     int ans3 = data.st[bl + 1][l];
     int ans4 = data.st[br - (1 << l)][l];
     ans = MinimumHeights(ans, MinimumHeights(ans3, ans4, data), data);
@@ -102,7 +102,7 @@ int LCA(int v, int u, AllData &data) {
   return data.euler_bypass[ans];
 }
 
-int RMQ(int left, int right, std::vector<int> &graph) {
+int RMQ(int left, int right, const std::vector<int> &graph) {
   AllData data;
   std::vector<int> parent(graph.size(), -1);
   std::stack<int> stack;
@@ -118,7 +118,7 @@ int RMQ(int left, int right, std::vector<int> &graph) {
     stack.push(i);
   }
 
-  int root;
+  int root = -1;
   data.graph.assign(graph.size(), std::vector<int>());
   for (int i = 0; i < graph.size(); i++) {
     data.graph[i].push_back(parent[i]);

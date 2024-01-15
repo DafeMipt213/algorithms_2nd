@@ -2,7 +2,7 @@
 
 #include <limits>
 
-bool BellmanFord(int n, int source, std::vector<Edge> &edges,
+bool BellmanFord(int n, int source, const std::vector<Edge> &edges,
                  std::vector<long long> &distance) {
   distance[source] = 0;
   for (int i = 0; i <= n; i++) {
@@ -18,7 +18,8 @@ bool BellmanFord(int n, int source, std::vector<Edge> &edges,
   return false;
 }
 
-std::vector<long long> Dijkstra(int n, int source, std::vector<Edge> &edges,
+std::vector<long long> Dijkstra(int n, int source,
+                                const std::vector<Edge> &edges,
                                 std::vector<long long> &potential) {
   std::set<std::pair<long long, int>> S;
   std::vector<long long> distance(n + 1, std::numeric_limits<long long>::max());

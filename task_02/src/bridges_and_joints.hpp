@@ -26,7 +26,7 @@ bool operator==(const Edge<T> a, const Edge<T> b) {
 }
 
 template <typename T = int>
-bool operator==(const BridgesAndJoints<T> a, const BridgesAndJoints<T> b) {
+bool operator==(const BridgesAndJoints<T> &a, const BridgesAndJoints<T> &b) {
   return (a.bridges == b.bridges && a.joints == b.joints);
 }
 

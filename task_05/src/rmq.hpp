@@ -8,12 +8,12 @@ struct AllData {
   std::vector<std::vector<int>> graph, st;
   std::vector<int> visited, euler_bypass, height, log2, block_mask;
   std::vector<std::vector<std::vector<int>>> blocks;
-  AllData(){};
+  AllData() = default;
 };
 
 void DFS(int v, int p, int h, AllData &data);
-int MinimumHeights(int i, int j, AllData &data);
+int MinimumHeights(int i, int j, const AllData &data);
 void Precompute(int root, AllData &data);
-int LCABlock(int b, int l, int r, AllData &data);
-int LCA(int v, int u, AllData &data);
-int RMQ(int left, int right, std::vector<int> &graph);
+int LCABlock(int b, int l, int r, const AllData &data);
+int LCA(int v, int u, const AllData &data);
+int RMQ(int left, int right, const std::vector<int> &graph);

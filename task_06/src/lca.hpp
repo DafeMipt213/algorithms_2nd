@@ -13,7 +13,7 @@ struct AllData {
   std::map<T, int> height;
   std::vector<int> log2, block_mask;
   std::vector<std::vector<std::vector<int>>> blocks;
-  AllData(){};
+  AllData() = default;
 };
 
 template <typename T = int>
@@ -118,7 +118,7 @@ int LCA(T v, T u, AllData<T> &data) {
   int ans2 = LCABlock(br, 0, r % data.block_size, data);
   int ans = MinimumHeights(ans1, ans2, data);
   if (bl + 1 < br) {
-    int l = data.log2[br - bl - 1];
+    l = data.log2[br - bl - 1];
     int ans3 = data.st[bl + 1][l];
     int ans4 = data.st[br - (1 << l)][l];
     ans = MinimumHeights(ans, MinimumHeights(ans3, ans4, data), data);
